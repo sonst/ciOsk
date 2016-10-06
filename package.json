@@ -1,0 +1,21 @@
+{
+  "name": "envipass",
+  "version": "0.0.1",
+  "description": "overpass-api wrapper",
+  "main": "./src/enviPass.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "make test",
+    "build": "webpack ./src/EnviPass.js ./dist/enviPass.bundle.js"
+  },
+  "author": "soean steiger <soean.steiger@googlemail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "json-loader": "^0.5.4",
+    "mocha": "^3.1.0",
+    "query-overpass": "^1.1.0"
+  }
+}
