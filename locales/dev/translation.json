@@ -1,0 +1,12 @@
+{
+  "app": {
+    "title": "ciOsk"
+  },
+
+  "panel" : {
+    "splitPanelHorizontal" : "Das Fenster horizontal teilen.",
+    "splitPanelVertical" : "Das Fenster vertikal teilen.",
+    "addContent" : "Inhalt definieren.",
+    "removePanel" : "Dieses Fenster entfernen."
+  }
+}

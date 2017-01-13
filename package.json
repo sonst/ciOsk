@@ -1,21 +1,28 @@
 {
-  "name": "envipass",
+  "name": "ciOsk",
   "version": "0.0.1",
-  "description": "overpass-api wrapper",
-  "main": "./src/enviPass.js",
+  "description": " ciOsk ",
+  "main": "./src/ciOsk.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
     "test": "make test",
-    "build": "webpack ./src/EnviPass.js ./dist/enviPass.bundle.js"
+    "build": "webpack --display-error-details ./src/ciOsk.js ./dist/ciOsk.bundle.js",
+    "build-release": "PROD_ENV=1 webpack  ./src/ciOsk.js ./dist/ciOsk.bundle.js",
+    "refresh": "REFRESH_ENV=1 webpack  ./src/ciOsk.js ./dist/ciOsk.bundle.js"
   },
   "author": "soean steiger <soean.steiger@googlemail.com>",
   "license": "MIT",
   "devDependencies": {
     "chai": "^3.5.0",
-    "json-loader": "^0.5.4",
+    "jsdom": "^9.9.1",
     "mocha": "^3.1.0",
-    "query-overpass": "^1.1.0"
+    "mocha-jsdom": "^1.1.0"
+  },
+  "dependencies": {
+    "copy-webpack-plugin": "^4.0.0",
+    "jquery": "^3.1.1",
+    "webpack": "^1.13.3"
   }
 }

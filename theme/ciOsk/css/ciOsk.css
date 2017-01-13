@@ -1,0 +1,844 @@
+
+/*|****************************************************************|
+  |                        The Globals                             |
+  |----------------------------------------------------------------|
+  | - StyleClasses and annotations used to decorate, patch or      |
+  |   alter the application`s impression in general.               |
+  |________________________________________________________________|*/
+
+
+/*suppress the gecko`s dotted border on focus*/
+:focus {outline:none;}
+::-moz-focus-inner {border:0;}
+
+
+body {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	overflow: hidden;
+	height: 100%;
+	max-height: 100%;
+  font-size:76%;
+  color: 	#333333 !important;
+  font-family: VWTextWeb-Regular,Helvetica,sans-serif;
+
+}
+
+body, h1, h2, h3, h4, h5, h6, fieldset>legend{
+  font-size-adjust: 0.5;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4, h5, h6,fieldset>legend{
+  afont-family:
+}
+
+h1 {
+  font-size: 2em;
+  /* 2x body copy size = 32px */
+  line-height: 1.25;
+  /* 45px / 36px */
+}
+
+h2 {
+  font-size: 1.625em;
+  /* 1.625x body copy size = 26px */
+  line-height: 1.15384615;
+  /* 30px / 26px */
+}
+
+
+h3,fieldset>legend {
+  font-size: 1.375em;
+  /* 1.375x body copy size = 22px */
+  line-height: 1.13636364;
+  /* 25px / 22px */
+}
+
+h4 {
+  font-size: 1.125em;
+  /* 1.125x body copy size = 18px */
+  line-height: 1.11111111;
+}
+
+
+hr{
+  color: #3f4b63;
+  margin:0;
+}
+
+img, a {
+  border:none;
+  outline: none;
+}
+
+@media (min-width: 43.75em) {
+  h1 {
+    font-size: 2.5em;
+    /* 2.5x body copy size = 40px */
+    line-height: 1.125;
+  }
+  h2 {
+    font-size: 2em;
+    /* 2x body copy size = 32px */
+    line-height: 1.25;
+  }
+  h3,fieldset>legend {
+    font-size: 1.5em;
+    /* 1.5x body copy size = 24px */
+    line-height: 1.25;
+  }
+  h4 {
+    line-height: 1.22222222;
+    /* (22px / 18px */
+  }
+}
+
+@media (min-width: 56.25em) {
+   h1 {
+    font-size: 3em;
+    /* 3x body copy size = 48px */
+    line-height: 1.05;
+    /* keep to a multiple of the 20px line height
+    and something more appropriate for display headings */
+  }
+  h2 {
+    font-size: 2.25em;
+    /* 2.25x body copy size = 36px */
+    line-height: 1.25;
+  }
+  h3,fieldset>legend {
+    font-size: 1.75em;
+    /* 1.75x body copy size = 28px */
+    line-height: 1.25;
+  }
+}
+
+/* suppress user selection on any element (real Browsers) */
+* {
+  -webkit-touch-callout:none;
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+  user-select:none;
+}
+
+/* enable user selection on following elements (real Browsers) */
+input, textarea, table.data-table,table.data-table tr,table.data-table td {
+  -webkit-touch-callout:default;
+  -webkit-user-select:text;
+  -moz-user-select:text;
+  -ms-user-select:text;
+  user-select:text;
+}
+
+input,textarea,select{
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+tr.ui-state-hover,li.ui-state-hover{
+  font-weight:inherit !important;
+}
+
+
+.ui-overlay {
+  background:black;
+  opacity:0.8;
+}
+
+.ui-dimmed{
+  background-color:#333333 !important;
+}
+
+.ui-light{
+  background-color:#ffffff !important;
+}
+
+.ui-color-light {
+  color: #a3a3a3;
+}
+
+.ui-opacity80{
+   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+	filter: alpha(opacity=80);
+	-moz-opacity: 0.8;
+	-khtml-opacity: 0.8;
+	opacity: 0.8;
+}
+
+
+/*|****************************************************************|
+  |               Buttons and interaction content                  |
+  |----------------------------------------------------------------|
+  | - StyleClasses for beautifying the menubuttons and other inputs|
+  |________________________________________________________________|*/
+
+
+div.menu-btn-container{
+  border:none !important;
+}
+
+div.ui-header-menu-btn{
+  width:50px;
+  height:50px;
+  border-top: 1px solid white;
+  cursor:pointer;
+  background-color:#2174AC;
+  color:white;
+  text-align:center;
+  font-size:2.5em;
+  line-height:50px;
+  display:none;
+}
+
+
+div.menu-btn-container.menu-spread .menu-btn-main{
+  position:absolute;
+  top:-50px;
+}
+
+div.menu-btn-container.menu-spread .menu-btn-wrapper{
+  position:relative;
+  width:250px;
+  top:50px;
+  height:150px;
+}
+
+div.menu-btn-container.menu-spread .ui-header-menu-btn{
+  float:left;
+}
+
+div.menu-btn-main{
+  display:block;
+  border-bottom: medium none;
+  border-top: medium none;
+}
+
+div.ui-header-menu-btn.menu-btn-main:hover{
+   background-color:  #1d5987;
+}
+
+div.ui-lighttable-btn.stacked-icon .icon-back{
+  color:#17476b;
+}
+
+div.ui-lighttable-btn.stacked-icon:hover .icon-back{
+  acolor: grey;/*#2c87cc !important;*/
+}
+
+div.ui-lighttable-btn.stacked-icon.ui-state-selected .icon-front{
+  color : white;
+}
+
+div.ui-lighttable-btn.stacked-icon.ui-state-selected .icon-back{
+  color: #2c87cc;
+}
+
+div.ui-lighttable-btn.stacked-icon.ui-state-selected .pulse-icon-color{
+  color: #FF871F;
+}
+
+.ui-state-selected {
+   background-color: #1d5987 !important;
+   color: #287bba;
+}
+
+.additional-text-shadow{
+  /*
+  color: white;
+  text-shadow: 0 1px 0 #ccc,
+               0 2px 0 #c9c9c9,
+               0 3px 0 #bbb,
+               0 4px 0 #b9b9b9,
+               0 3px 0 #aaa,
+               0 4px 1px rgba(0,0,0,.1),
+               0 0 1px rgba(0,0,0,.1),
+               0 1px 3px rgba(0,0,0,.3),
+               0 3px 5px rgba(0,0,0,.2),
+               0 5px 6px rgba(0,0,0,.25),
+               0 6px 6px rgba(0,0,0,.2),
+               0 8px 8px rgba(0,0,0,.15);
+  */
+}
+
+.hide-background-image{
+  background-position: -9999px -9999px !important;
+}
+
+
+div.ui-header-menu-btn:hover{
+   background-color: #1d5987 !important;
+}
+
+
+div.ui-lighttable-btn{
+
+  width:50px;
+  height:100%;
+  cursor:pointer;
+  background-color:#2174AC;
+  color:white;
+  text-align:center;
+  font-size:2.5em;
+  line-height:50px;
+
+}
+
+div.view-btn{
+  width:120px;
+  font-weight:bold;
+}
+
+div.view-btn.menu-option{
+ border-bottom: 1px solid white;
+ font-size:1em;
+ line-height:2em;
+ width:200px;
+ margin-left:-38px;
+}
+
+div.btn-right{
+  float:right;
+  border-left: 1px solid white;
+}
+
+div.btn-left{
+  float:left;
+  border-right: 1px solid white;
+}
+
+div.ui-lighttable-btn:not(.ui-state-disabled):hover{
+   background-color: #1d5987 !important;
+}
+
+div.ui-header-content{
+	position: fixed;
+	width:	100%;
+  min-width:300px;
+	height:50px;
+	background-color:white;
+	z-index:60;
+	-webkit-box-shadow: 0 4px 4px -2px #000000;
+  -moz-box-shadow: 0 4px 4px -2px #000000;
+  box-shadow: 0 4px 4px -2px #000000;
+}
+
+.ui-selectmenu-button {
+  border-radius: 2px !important;
+  border-color: black !important;
+  -moz-border-radius: 2px !important;
+  border: 1px solid grey;
+  background:none !important;
+  width:100% !important;
+  background-color:white !important;
+  color:#333!important;
+  font-weight:normal !important;
+}
+
+.ui-selectmenu-button span.ui-selectmenu-text {
+  padding:0 !important;
+  padding-left:0.4em !important;
+}
+
+.ui-selectmenu-menu .ui-menu{
+  max-height:250px;
+  max-width: 180px;
+}
+
+
+.ui-selectmenu-menu .ui-menu .ui-menu-item{
+  padding: 3px 1em 3px 3em;
+}
+
+.ui-selectmenu-menu .ui-menu li{
+  height:26px;
+
+}
+
+.ui-selectmenu-button span.ui-icon{
+  right:0.1em !important;
+}
+
+.block-user-input{
+  cursor: not-allowed !important;
+}
+.header-logo{
+  margin-left:1.5em;
+  margin-top:7px;
+  display:none;
+  width:35px;
+  height:35px;
+  background-position:center center;
+  background-repeat:no-repeat;
+  background-size:contain;
+  background-image: url('../images/vwBrandIcon.png');
+}
+
+
+
+
+/*|****************************************************************|
+  |                        Main Content                            |
+  |----------------------------------------------------------------|
+  |________________________________________________________________|*/
+
+
+div.ui-main-content{
+	position: fixed;
+	left: 0px;
+	right: 0;
+	bottom: 0;
+  top:50px;
+	overflow-y: auto;
+  min-width:410px;
+}
+
+/* type area */
+.ui-type-area{
+	margin-top:55px;
+	margin: 15px;
+}
+
+/* content heading */
+.ui-page-caption-icon{
+  font-size:25px  !important;
+  float:left;
+}
+
+.ui-page-caption{
+  padding-left:35px;
+}
+
+
+.ui-selectable:hover .tile-select-icon{
+  display:block !important;
+
+   -o-transition:color .2s ease-out, background 1s ease-in;
+  -ms-transition:color .2s ease-out, background 1s ease-in;
+  -moz-transition:color .2s ease-out, background 1s ease-in;
+  -webkit-transition:color .2s ease-out, background 1s ease-in;
+  /* ...and now override with proper CSS property */
+  transition:color .2s ease-out, background 1s ease-in;
+
+}
+
+.ui-selectable .tile-select-icon {
+  display:none;
+  position: absolute;
+  font-size: 2em;
+  color:grey;
+  bottom:20px;
+  left:20px;
+}
+
+.ui-selectable .tile-select-icon.fa-check-square-o {
+   display:block !important;
+
+}
+
+
+.ui-selectionflow-item {
+  background-color:#2174AC;
+  cursor:pointer;
+  font-size: 3em;
+  color:white;
+  text-align:center;
+
+}
+
+
+/*|****************************************************************|
+  |                    IRIS Image properties                       |
+  |----------------------------------------------------------------|
+  | - StyleClasses for the respective images gathered from the     |
+  |   IRIS servlet. Dependend on the current viewmode the images   |
+  |   arrange themselves in different styles...                    |
+  |________________________________________________________________|*/
+
+
+.ui-iris-image {
+  width:100%;
+}
+
+.grid-item {
+  cursor: zoom-in;
+}
+
+.grid-item.ui-image-supersize {
+  cursor: zoom-out;
+  a-webkit-transition: ease 0.4s all;
+  a-moz-transition: ease 0.4s all;
+  a-ms-transition: ease 0.4s all;
+  a-o-transition: ease 0.4s all;
+  atransition: ease 0.4s all;
+}
+
+.grid-item.selectable-hover {
+  abackground-size:cover;
+  cursor:pointer;
+     -moz-box-shadow:  0px 0px 43px -35px #2174AC inset;
+    -webkit-box-shadow:0px 0px 43px -35px #2174AC inset;
+     box-shadow:0px 0px 43px -35px #2174AC inset;
+}
+
+.grid-item .grid-item-pip{
+
+  position:absolute;
+  left:5%;
+  top:10%;
+
+  aposition:relative;
+  afloat:left;
+
+  width:10%;
+  padding-top:10%;
+  background-repeat:no-repeat;
+  background-size:contain;
+}
+
+/* the image layouts*/
+
+.fill-square{
+   background-size:cover;
+}
+
+.square-4 {
+    float:left;
+    position: relative;
+    width: 20%;
+    padding-bottom : 30%;
+    margin-top:0.5em;
+    margin-bottom:0.5em;
+    margin-left:1.66%;
+    margin-right:1.66%;
+    background-position:center center;
+    background-repeat:no-repeat;
+    background-size:contain;
+}
+
+.square-3 {
+    float:left;
+    position: relative;
+    width: 30%;
+    padding-bottom : 15%;
+    margin-top:0.5em;
+    margin-bottom:0.5em;
+    margin-left:1.66%;
+    margin-right:1.66%;
+    background-position:center center;
+    background-repeat:no-repeat;
+    background-size:contain;
+}
+
+.square-2 {
+    float:left;
+    position: relative;
+    width: 45%;
+    padding-bottom : 20%;
+    margin-top:0.5em;
+    margin-bottom:0.5em;
+    margin-left:1.66%;
+    margin-right:1.66%;
+    background-position:center center;
+    background-repeat:no-repeat;
+    background-size:contain; /* you set this to "contain" if you don't want the images to be cropped */
+}
+
+.square-1 {
+    float:left;
+    position: relative;
+    width: 98%;
+    padding-bottom : 40%;
+    margin-top:0.5em;
+    margin-bottom:0.5em;
+    margin-left:1.66%;
+    margin-right:1.66%;
+    background-position:center center;
+    background-repeat:no-repeat;
+    background-size:contain;
+}
+
+/* used to show the given container in the respective document`s max width*/
+.square-0 {
+    float:left;
+    position: relative;
+    width: 100%;
+    top: 50%;
+    margin:0 !important;
+    background-position:center center;
+    background-repeat:no-repeat;
+    /* you leave this set to "contain" if you don't want the images to be cropped */
+    background-size:contain;
+}
+
+
+/* the images settings panel*/
+
+div.ui-iris-image-overlay{
+  background-color:black;
+  color:white;
+  opacity:0.8;
+  position:absolute;
+  top:0;
+  left:0;
+  bottom:0;
+  right:0;
+  cursor:default;
+}
+
+div.ui-iris-image-overlay .image-overlay-content{
+  overflow:auto;
+  background:none;
+  position:absolute;
+  top:0;
+  right:0;
+  left:0;
+  bottom:0;
+  margin:5px;
+}
+
+div.ui-iris-image-overlay .image-overlay-header{
+  position:absolute;
+  width:100%;
+
+  opacity:1;
+  background-color:black;
+}
+
+div.ui-iris-image-overlay .ui-btn-overlay{
+  position:absolute;
+  bottom:0;
+  right:1.5em;
+  z-index:50;
+
+  cursor:pointer;
+  height:1.8em;
+  width:1.3em;
+  padding-left:8px;
+  padding-top:2px;
+  color:white;
+  background-color:#2174AC;
+  font-size:1.5em;
+}
+
+div.ui-iris-image-overlay .ui-btn-overlay:hover{
+  background-color:  #1d5987;
+  -webkit-box-shadow: 0px 2px 10px -2px #BBB;
+  -moz-box-shadow: 0px 2px 10px -2px #BBB;
+  box-shadow: 0px 2px 10px -2px #BBB;
+
+}
+
+div.ui-iris-image-overlay table{
+  width:90%;
+  max-width:450px;
+  margin-left:auto;
+  margin-right:auto;
+  margin-top:2em;
+  margin-bottom:auto;
+}
+
+div.ui-iris-image-overlay .image-overlay-icon{
+  position:absolute;
+  top:-15px;
+  font-size:35px;
+  left:-10px;
+  z-index:80;
+}
+
+
+.ui-image-supersize div.ui-iris-image-overlay .image-overlay-icon{
+  top:15px;
+  left:15px;
+}
+
+.ui-image-supersize div.ui-iris-image-overlay table{
+  margin-top:15% !important;
+}
+
+div.ui-iris-image-overlay input,div.ui-iris-image-overlay textarea, div.ui-iris-image-overlay select{
+  width:100%;
+}
+
+div.ui-iris-image-overlay table td .ui-empty-block-wrapper{
+  display:none;
+  position:absolute;
+  top: 0;
+  left:0;
+  right:0;
+  bottom:0;
+  background-color:#2174AC;
+  opacity:0.5;
+}
+
+div.ui-iris-image-overlay table td a.ui-link-iris{
+  color:white;
+  text-decoration:none;
+}
+
+
+div.ui-iris-image-overlay table td a.ui-link-iris:hover{
+  color:#1d5987 ;
+}
+
+.image-container {
+  width:100%;
+  height:100%;
+}
+
+
+.ui-info-link{
+  cursor:info;
+}
+
+.ui-info-link:hover{
+  color:#1d5987 ;
+}
+
+
+
+/*|****************************************************************|
+  |                       user response                            |
+  |----------------------------------------------------------------|
+  | - StyleClasses used to give the user certain callbacks on      |
+  |   interaction. Currently this targets the ability of the       |
+  |   browser to be css3 compliant.                                |
+  |   Therefore no MS IE < 11                                      |
+  |________________________________________________________________|*/
+
+
+    .ui-state-pulse{
+        -webkit-animation: color-change 1s infinite;
+        -moz-animation: color-change 1s infinite;
+        -o-animation: color-change 1s infinite;
+        -ms-animation: color-change 1s infinite;
+        animation: color-change 1s infinite;
+    }
+
+    @-webkit-keyframes color-change {
+        0% { color: white; }
+        50% { color: #E4002C; }
+        100% { color: white; }
+    }
+
+    @-moz-keyframes color-change {
+        0% { color: white; }
+        50% { color: #E4002C; }
+        100% { color: white; }
+    }
+
+    @-ms-keyframes color-change {
+        0% { color: white; }
+        50% { color: #E4002C; }
+        100% { color: white; }
+    }
+
+    @-o-keyframes color-change {
+        0% { color: white; }
+        50% { color: #E4002C; }
+        100% { color: white; }
+    }
+
+    @keyframes color-change {
+        0% { color: white; }
+        50% { color: #E4002C; }
+        100% { color: white; }
+    }
+
+    @keyframes loadingImage {
+        0 {width: 2vmin;}
+        50% {width: 6vmin;}
+        100% {width: 2vmin;}
+    }
+
+    .load-image-indicator{
+      position:absolute;
+      width:100%;
+      height:100%;
+      text-align:center;
+      left:0;
+      top:0;
+      z-index:0;
+    }
+
+    .load-image-caption{
+      opacity:0.2;
+      margin-left:-1em;
+      position:absolute;
+      left:50%;
+      text-align:center;
+      top: 50%;
+      z-index:1;
+    }
+
+    .load-image-caption>span{
+      font-size:18px;  /*fallback*/
+      font-size:2vmin;
+    }
+
+    .load-image-indicator .line:nth-last-child(1) {animation: loadingImage 1.5s 1s infinite;}
+    .load-image-indicator .line:nth-last-child(2) {animation: loadingImage 1.5s .5s infinite;}
+    .load-image-indicator .line:nth-last-child(3) {animation: loadingImage 1.5s 0s infinite;}
+
+    .line {
+      display: inline-block;
+      width: 2vmin;
+      height: 3vmin;
+      border-radius: 5px;
+      margin-right:5px;
+      background-color:#A9A9A9;
+      opacity:0.5;
+    }
+
+    /* The info splash dialog */
+    .ui-splash-info{
+      display:none;
+      opacity:0.55;
+      color:white;
+      background-color:grey;
+      width:600px;
+      position:absolute;
+      top:50%;
+      left:50%;
+      margin-left:-300px;
+      margin-top:-125px;
+      box-shadow: 2px 2px 5px #333;
+      z-index:55;
+    }
+
+
+
+/*|****************************************************************|
+  |                   table styles in general                      |
+  |----------------------------------------------------------------|
+  | - StyleClasses used to beautify any application`s dataTable    |
+  |________________________________________________________________|*/
+
+
+    .ui-tablerow-even {
+      background-color:#eeeeee;
+    }
+
+    .ui-tablerow-odd {
+      background-color: #fdfdfd;
+    }
+
+    .ui-tablerow-btn {
+      width:25px;
+      height:25px;
+      color:white;
+      text-align:center;
+      float:left;
+      background-color:#2174AC;
+      font-size:1.6em;
+      cursor:pointer;
+      margin-right:0.1em;
+    }
+
+    table tr{
+      height:25px;
+    }
+
