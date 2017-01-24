@@ -8,32 +8,40 @@ var REFRESH = JSON.parse(process.env.REFRESH_ENV || '0');
 var plugins = [];
 var copyPluginFiles = [];
 
+
+
 if(REFRESH){
   copyPluginFiles = [
-            { from: './index.html'},
-            { from: './theme/ciOsk/css' , to:'./theme/ciOsk/css'},
+    { from: './index.html'},
+    { from: './theme/ciOsk/css' , to:'./theme/ciOsk/css'},
+    { from: './locales' , to:'./locales'}
   ]
-
 } else {
   copyPluginFiles = [
-            { from: './index.html'},
-            { from: './theme' , to:'./theme'},
-            { from: './locales' , to:'./locales'},
-            { from: './lib' , to:'./lib'},
+    { from: './index.html'},
+    { from: './theme' , to:'./theme'},
+    { from: './locales' , to:'./locales'},
+    { from: './lib' , to:'./lib'}
   ]
 }
 
 plugins.push(
-        new webpack.ProvidePlugin({
-            $: "jquery",
-            jQuery: "jquery"
-        })
+  new webpack.ProvidePlugin({
+    'jQuery': 'jquery',
+    '$': 'jquery',
+    'global.jQuery': 'jquery'
+  })
 );
 
 plugins.push( new CopyWebpackPlugin(copyPluginFiles) );
 
 if (PROD){
-  plugins.push(new webpack.optimize.UglifyJsPlugin({minimize: true}));
+  plugins.push(new webpack.optimize.UglifyJsPlugin({
+    minimize: true,
+    compress: {
+      warnings: true
+    }
+  }));
 }
 
 module.exports = {
@@ -50,5 +58,12 @@ module.exports = {
     net: 'empty',
     tls: 'empty'
   },
+  resolve: {
+    alias: {
+      'jquery-ui' : 'jquery-ui-dist/jquery-ui.js'
+    },
+    extensions: ['', '.js']
+  },
+
   plugins: plugins
 }

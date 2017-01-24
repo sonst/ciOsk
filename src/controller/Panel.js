@@ -3,15 +3,18 @@ var PanelMarkup    = require('../view/PanelMarkup');
 var PanelAction    = require('../view/PanelAction');
 var $              = require('jquery');
 
+
 var Panel = function(id, splitType, parent){
 
   var container    = null,
-      panelMarkup  = null,
-      panelAction  = null,
-      panelContent = null,
       panelChildA  = null,
       panelChildB  = null,
       parent       = parent || null,
+
+      panelMarkup  = null,
+      panelAction  = null,
+      panelContent = null,
+
       instance     = this;
 
   var options = {
@@ -25,7 +28,7 @@ var Panel = function(id, splitType, parent){
     eventShowCursor:         'showCursorEvent.panelLayout'
   };
 
-  this.init = function(container){
+  this.init = function(){
     splitType   = splitType ? splitType : PanelSplitType.NONE;
     panelMarkup = new PanelMarkup();
     initDOM();
@@ -33,9 +36,6 @@ var Panel = function(id, splitType, parent){
   };
 
   var initDOM = function(){
-    if(typeof (container) === 'undefined' || container === null){
-      throw new ReferenceError('container undefined!');
-    }
     container.append(panelMarkup.getPanelContainer(id, splitType));
   };
 
@@ -49,8 +49,8 @@ var Panel = function(id, splitType, parent){
   };
 
   this.addContent = function(markup){
-    var panel = instance.getPanelElement()
-    if(!panel.hasChild()){
+    var panel = instance.getElement()
+    if(!panel.hasChildren()){
       panel.append(markup);
     }
   };
@@ -62,7 +62,7 @@ var Panel = function(id, splitType, parent){
     panelAction.removeEvents();
     panelAction.removeCtxtMenu();
 
-    instance.getPanelElement().replaceWith(panelMarkup.getPanelContainer(id, splitType));
+    instance.getElement().replaceWith(panelMarkup.getPanelContainer(id, splitType));
 
     panelElementA = $('#'+id+'_pnl0');
     panelChildA = new Panel(id + '0', PanelSplitType.NONE, instance);
@@ -75,16 +75,17 @@ var Panel = function(id, splitType, parent){
     panelChildB.init();
 
     panelAction.initResizablePanel();
-    panelChildA.getPanelElement().trigger('mouseenter.panel', true);
+    panelChildA.getElement().trigger('mouseenter.panel', true);
 
     if(panelContent != null) {
       panelChildA.addPanelContent(panelContent.getUrl());
       panelContent = null;
     }
+
   };
 
   this.remove = function(){
-    if(parent && parent.hasChild()){
+    if(parent && parent.hasChildren()){
       parent.removeChild(instance);
     }
   };
@@ -96,8 +97,8 @@ var Panel = function(id, splitType, parent){
     notSelected = instance.getChild(pnl);
 
     if(notSelected != null){
-      notSelected.getPanelElement().effect('highlight', { color: "#303030" }, 600);
-      instance.getPanelElement().replaceWith(notSelected.getPanelElement());
+      notSelected.getElement().effect('highlight', { color: "#303030" }, 600);
+      instance.getElement().replaceWith(notSelected.getElement());
       panelAction.removeEvents();
       cachedId = instance.getId();
       notSelected.setParent(instance.getParent());
@@ -114,11 +115,6 @@ var Panel = function(id, splitType, parent){
         instance.getParent().setChildren(tmpChildren);
       }
 
-      ///////////////////////////////////////////////////////////////////////////////
-      // @TODO SOS refactorME: somehow calling the replace fnctn behaves differently
-      //      instance.getParent().replaceChild(cachedId, instance);
-      ///////////////////////////////////////////////////////////////////////////////
-
       panelAction = new PanelAction(instance);
 
     } else {
@@ -130,7 +126,7 @@ var Panel = function(id, splitType, parent){
     return id;
   };
 
-  this.getPanelElement = function(){
+  this.getElement = function(){
     return $('#'+instance.getId());
   };
 
@@ -139,15 +135,15 @@ var Panel = function(id, splitType, parent){
   };
 
   this.addPanelContent = function(url){
-    if(panelContent != null){
-
-    } else {
-      panelContent = new PanelContent(instance.getPanelElement(),url);
-    }
+    panelContent = new PanelContent(instance.getElement(),url);
   };
 
   this.setPanelContent = function(pc){
     panelContent = pc;
+  };
+
+  this.isRootPanel = function(){
+    return instance.getParent() === null;
   };
 
   this.setPanelType = function(type){
@@ -196,18 +192,6 @@ var Panel = function(id, splitType, parent){
       retVal = panelChildA;
     }
     return retVal;
-  };
-
-  this.replaceChild = function(id, newPnl){
-    if(id === panelChildA.getId()) {
-      panelChildB = newPnl;
-      return true;
-    }
-    if(id === panelChildB.getId()) {
-      panelChildA = newPnl;
-      return true;
-    }
-    return false;
   };
 
   this.setChildren = function(children){

@@ -1,844 +1,421 @@
-
-/*|****************************************************************|
-  |                        The Globals                             |
-  |----------------------------------------------------------------|
-  | - StyleClasses and annotations used to decorate, patch or      |
-  |   alter the application`s impression in general.               |
-  |________________________________________________________________|*/
-
-
-/*suppress the gecko`s dotted border on focus*/
-:focus {outline:none;}
-::-moz-focus-inner {border:0;}
-
-
+html,
 body {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	overflow: hidden;
-	height: 100%;
-	max-height: 100%;
-  font-size:76%;
-  color: 	#333333 !important;
-  font-family: VWTextWeb-Regular,Helvetica,sans-serif;
 
-}
-
-body, h1, h2, h3, h4, h5, h6, fieldset>legend{
-  font-size-adjust: 0.5;
-  text-rendering: optimizeLegibility;
-}
-
-h1, h2, h3, h4, h5, h6,fieldset>legend{
-  afont-family:
-}
-
-h1 {
-  font-size: 2em;
-  /* 2x body copy size = 32px */
-  line-height: 1.25;
-  /* 45px / 36px */
-}
-
-h2 {
-  font-size: 1.625em;
-  /* 1.625x body copy size = 26px */
-  line-height: 1.15384615;
-  /* 30px / 26px */
-}
-
-
-h3,fieldset>legend {
-  font-size: 1.375em;
-  /* 1.375x body copy size = 22px */
-  line-height: 1.13636364;
-  /* 25px / 22px */
-}
-
-h4 {
-  font-size: 1.125em;
-  /* 1.125x body copy size = 18px */
-  line-height: 1.11111111;
-}
-
-
-hr{
-  color: #3f4b63;
-  margin:0;
-}
-
-img, a {
-  border:none;
-  outline: none;
-}
-
-@media (min-width: 43.75em) {
-  h1 {
-    font-size: 2.5em;
-    /* 2.5x body copy size = 40px */
-    line-height: 1.125;
-  }
-  h2 {
-    font-size: 2em;
-    /* 2x body copy size = 32px */
-    line-height: 1.25;
-  }
-  h3,fieldset>legend {
-    font-size: 1.5em;
-    /* 1.5x body copy size = 24px */
-    line-height: 1.25;
-  }
-  h4 {
-    line-height: 1.22222222;
-    /* (22px / 18px */
-  }
-}
-
-@media (min-width: 56.25em) {
-   h1 {
-    font-size: 3em;
-    /* 3x body copy size = 48px */
-    line-height: 1.05;
-    /* keep to a multiple of the 20px line height
-    and something more appropriate for display headings */
-  }
-  h2 {
-    font-size: 2.25em;
-    /* 2.25x body copy size = 36px */
-    line-height: 1.25;
-  }
-  h3,fieldset>legend {
-    font-size: 1.75em;
-    /* 1.75x body copy size = 28px */
-    line-height: 1.25;
-  }
-}
-
-/* suppress user selection on any element (real Browsers) */
-* {
-  -webkit-touch-callout:none;
-  -webkit-user-select:none;
-  -moz-user-select:none;
-  -ms-user-select:none;
-  user-select:none;
-}
-
-/* enable user selection on following elements (real Browsers) */
-input, textarea, table.data-table,table.data-table tr,table.data-table td {
-  -webkit-touch-callout:default;
-  -webkit-user-select:text;
-  -moz-user-select:text;
-  -ms-user-select:text;
-  user-select:text;
-}
-
-input,textarea,select{
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
-
-tr.ui-state-hover,li.ui-state-hover{
-  font-weight:inherit !important;
-}
-
-
-.ui-overlay {
-  background:black;
-  opacity:0.8;
-}
-
-.ui-dimmed{
-  background-color:#333333 !important;
-}
-
-.ui-light{
-  background-color:#ffffff !important;
-}
-
-.ui-color-light {
-  color: #a3a3a3;
-}
-
-.ui-opacity80{
-   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
-	filter: alpha(opacity=80);
-	-moz-opacity: 0.8;
-	-khtml-opacity: 0.8;
-	opacity: 0.8;
-}
-
-
-/*|****************************************************************|
-  |               Buttons and interaction content                  |
-  |----------------------------------------------------------------|
-  | - StyleClasses for beautifying the menubuttons and other inputs|
-  |________________________________________________________________|*/
-
-
-div.menu-btn-container{
-  border:none !important;
-}
-
-div.ui-header-menu-btn{
-  width:50px;
-  height:50px;
-  border-top: 1px solid white;
-  cursor:pointer;
-  background-color:#2174AC;
+  height: 100%;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  padding: 0;
+  margin: 0;
+  overflow:hidden;
   color:white;
-  text-align:center;
-  font-size:2.5em;
-  line-height:50px;
-  display:none;
+  /*background-color:black;*/
+  background: repeating-linear-gradient(
+    45deg,
+    #606dbc,
+    #606dbc 10px,
+    #465298 10px,
+    #465298 20px
+  );
 }
 
-
-div.menu-btn-container.menu-spread .menu-btn-main{
-  position:absolute;
-  top:-50px;
-}
-
-div.menu-btn-container.menu-spread .menu-btn-wrapper{
-  position:relative;
-  width:250px;
-  top:50px;
-  height:150px;
-}
-
-div.menu-btn-container.menu-spread .ui-header-menu-btn{
-  float:left;
-}
-
-div.menu-btn-main{
-  display:block;
-  border-bottom: medium none;
-  border-top: medium none;
-}
-
-div.ui-header-menu-btn.menu-btn-main:hover{
-   background-color:  #1d5987;
-}
-
-div.ui-lighttable-btn.stacked-icon .icon-back{
-  color:#17476b;
-}
-
-div.ui-lighttable-btn.stacked-icon:hover .icon-back{
-  acolor: grey;/*#2c87cc !important;*/
-}
-
-div.ui-lighttable-btn.stacked-icon.ui-state-selected .icon-front{
-  color : white;
-}
-
-div.ui-lighttable-btn.stacked-icon.ui-state-selected .icon-back{
-  color: #2c87cc;
-}
-
-div.ui-lighttable-btn.stacked-icon.ui-state-selected .pulse-icon-color{
-  color: #FF871F;
-}
-
-.ui-state-selected {
-   background-color: #1d5987 !important;
-   color: #287bba;
-}
-
-.additional-text-shadow{
-  /*
-  color: white;
-  text-shadow: 0 1px 0 #ccc,
-               0 2px 0 #c9c9c9,
-               0 3px 0 #bbb,
-               0 4px 0 #b9b9b9,
-               0 3px 0 #aaa,
-               0 4px 1px rgba(0,0,0,.1),
-               0 0 1px rgba(0,0,0,.1),
-               0 1px 3px rgba(0,0,0,.3),
-               0 3px 5px rgba(0,0,0,.2),
-               0 5px 6px rgba(0,0,0,.25),
-               0 6px 6px rgba(0,0,0,.2),
-               0 8px 8px rgba(0,0,0,.15);
-  */
-}
-
-.hide-background-image{
-  background-position: -9999px -9999px !important;
-}
-
-
-div.ui-header-menu-btn:hover{
-   background-color: #1d5987 !important;
-}
-
-
-div.ui-lighttable-btn{
-
-  width:50px;
-  height:100%;
-  cursor:pointer;
-  background-color:#2174AC;
-  color:white;
-  text-align:center;
-  font-size:2.5em;
-  line-height:50px;
-
-}
-
-div.view-btn{
-  width:120px;
-  font-weight:bold;
-}
-
-div.view-btn.menu-option{
- border-bottom: 1px solid white;
- font-size:1em;
- line-height:2em;
- width:200px;
- margin-left:-38px;
-}
-
-div.btn-right{
-  float:right;
-  border-left: 1px solid white;
-}
-
-div.btn-left{
-  float:left;
-  border-right: 1px solid white;
-}
-
-div.ui-lighttable-btn:not(.ui-state-disabled):hover{
-   background-color: #1d5987 !important;
-}
-
-div.ui-header-content{
-	position: fixed;
-	width:	100%;
-  min-width:300px;
-	height:50px;
-	background-color:white;
-	z-index:60;
-	-webkit-box-shadow: 0 4px 4px -2px #000000;
-  -moz-box-shadow: 0 4px 4px -2px #000000;
-  box-shadow: 0 4px 4px -2px #000000;
-}
-
-.ui-selectmenu-button {
-  border-radius: 2px !important;
-  border-color: black !important;
-  -moz-border-radius: 2px !important;
-  border: 1px solid grey;
-  background:none !important;
-  width:100% !important;
-  background-color:white !important;
-  color:#333!important;
-  font-weight:normal !important;
-}
-
-.ui-selectmenu-button span.ui-selectmenu-text {
-  padding:0 !important;
-  padding-left:0.4em !important;
-}
-
-.ui-selectmenu-menu .ui-menu{
-  max-height:250px;
-  max-width: 180px;
-}
-
-
-.ui-selectmenu-menu .ui-menu .ui-menu-item{
-  padding: 3px 1em 3px 3em;
-}
-
-.ui-selectmenu-menu .ui-menu li{
-  height:26px;
-
-}
-
-.ui-selectmenu-button span.ui-icon{
-  right:0.1em !important;
-}
-
-.block-user-input{
-  cursor: not-allowed !important;
-}
-.header-logo{
-  margin-left:1.5em;
-  margin-top:7px;
-  display:none;
-  width:35px;
-  height:35px;
-  background-position:center center;
-  background-repeat:no-repeat;
-  background-size:contain;
-  background-image: url('../images/vwBrandIcon.png');
-}
-
-
-
-
-/*|****************************************************************|
-  |                        Main Content                            |
-  |----------------------------------------------------------------|
-  |________________________________________________________________|*/
-
-
-div.ui-main-content{
-	position: fixed;
-	left: 0px;
-	right: 0;
-	bottom: 0;
-  top:50px;
-	overflow-y: auto;
-  min-width:410px;
-}
-
-/* type area */
-.ui-type-area{
-	margin-top:55px;
-	margin: 15px;
-}
-
-/* content heading */
-.ui-page-caption-icon{
-  font-size:25px  !important;
-  float:left;
-}
-
-.ui-page-caption{
-  padding-left:35px;
-}
-
-
-.ui-selectable:hover .tile-select-icon{
-  display:block !important;
-
-   -o-transition:color .2s ease-out, background 1s ease-in;
-  -ms-transition:color .2s ease-out, background 1s ease-in;
-  -moz-transition:color .2s ease-out, background 1s ease-in;
-  -webkit-transition:color .2s ease-out, background 1s ease-in;
-  /* ...and now override with proper CSS property */
-  transition:color .2s ease-out, background 1s ease-in;
-
-}
-
-.ui-selectable .tile-select-icon {
-  display:none;
-  position: absolute;
-  font-size: 2em;
-  color:grey;
-  bottom:20px;
-  left:20px;
-}
-
-.ui-selectable .tile-select-icon.fa-check-square-o {
-   display:block !important;
-
-}
-
-
-.ui-selectionflow-item {
-  background-color:#2174AC;
-  cursor:pointer;
-  font-size: 3em;
-  color:white;
-  text-align:center;
-
-}
-
-
-/*|****************************************************************|
-  |                    IRIS Image properties                       |
-  |----------------------------------------------------------------|
-  | - StyleClasses for the respective images gathered from the     |
-  |   IRIS servlet. Dependend on the current viewmode the images   |
-  |   arrange themselves in different styles...                    |
-  |________________________________________________________________|*/
-
-
-.ui-iris-image {
-  width:100%;
-}
-
-.grid-item {
-  cursor: zoom-in;
-}
-
-.grid-item.ui-image-supersize {
-  cursor: zoom-out;
-  a-webkit-transition: ease 0.4s all;
-  a-moz-transition: ease 0.4s all;
-  a-ms-transition: ease 0.4s all;
-  a-o-transition: ease 0.4s all;
-  atransition: ease 0.4s all;
-}
-
-.grid-item.selectable-hover {
-  abackground-size:cover;
-  cursor:pointer;
-     -moz-box-shadow:  0px 0px 43px -35px #2174AC inset;
-    -webkit-box-shadow:0px 0px 43px -35px #2174AC inset;
-     box-shadow:0px 0px 43px -35px #2174AC inset;
-}
-
-.grid-item .grid-item-pip{
-
-  position:absolute;
-  left:5%;
-  top:10%;
-
-  aposition:relative;
-  afloat:left;
-
-  width:10%;
-  padding-top:10%;
-  background-repeat:no-repeat;
-  background-size:contain;
-}
-
-/* the image layouts*/
-
-.fill-square{
-   background-size:cover;
-}
-
-.square-4 {
-    float:left;
-    position: relative;
-    width: 20%;
-    padding-bottom : 30%;
-    margin-top:0.5em;
-    margin-bottom:0.5em;
-    margin-left:1.66%;
-    margin-right:1.66%;
-    background-position:center center;
-    background-repeat:no-repeat;
-    background-size:contain;
-}
-
-.square-3 {
-    float:left;
-    position: relative;
-    width: 30%;
-    padding-bottom : 15%;
-    margin-top:0.5em;
-    margin-bottom:0.5em;
-    margin-left:1.66%;
-    margin-right:1.66%;
-    background-position:center center;
-    background-repeat:no-repeat;
-    background-size:contain;
-}
-
-.square-2 {
-    float:left;
-    position: relative;
-    width: 45%;
-    padding-bottom : 20%;
-    margin-top:0.5em;
-    margin-bottom:0.5em;
-    margin-left:1.66%;
-    margin-right:1.66%;
-    background-position:center center;
-    background-repeat:no-repeat;
-    background-size:contain; /* you set this to "contain" if you don't want the images to be cropped */
-}
-
-.square-1 {
-    float:left;
-    position: relative;
-    width: 98%;
-    padding-bottom : 40%;
-    margin-top:0.5em;
-    margin-bottom:0.5em;
-    margin-left:1.66%;
-    margin-right:1.66%;
-    background-position:center center;
-    background-repeat:no-repeat;
-    background-size:contain;
-}
-
-/* used to show the given container in the respective document`s max width*/
-.square-0 {
-    float:left;
-    position: relative;
-    width: 100%;
-    top: 50%;
-    margin:0 !important;
-    background-position:center center;
-    background-repeat:no-repeat;
-    /* you leave this set to "contain" if you don't want the images to be cropped */
-    background-size:contain;
-}
-
-
-/* the images settings panel*/
-
-div.ui-iris-image-overlay{
-  background-color:black;
-  color:white;
-  opacity:0.8;
-  position:absolute;
-  top:0;
-  left:0;
-  bottom:0;
-  right:0;
-  cursor:default;
-}
-
-div.ui-iris-image-overlay .image-overlay-content{
-  overflow:auto;
+input {
   background:none;
+  border: 1px solid white;
+  border-radius:2px;
+  line-height:1.8em;
+  color: white;
+  font-size:0.8em;
+  padding-left:0.2em;
+
+}
+
+input:focus {
+  outline: none;
+  box-shadow: 0px 0px 5px 0px white;
+}
+
+.page-layout-container:full-screen {
+  width: 100%;
+  background-color: rgba(255,255,255,0);
+}
+.page-layout-container:-webkit-full-screen {
+  background-color: rgba(255,255,255,0);
+}
+.page-layout-container:-moz-full-screen {
+  background-color: rgba(255,255,255,0);
+}
+
+.page-layout-container {
+  height:100%;
+  width:100%;
+}
+
+.page-layout-container .page-layout-overlay{
+  position:absolute;
+  top:0;
+  left:0;
+  bottom:0;
+  right:0;
+  background:none;
+  z-index:2000;
+  cursor:none;
+}
+
+
+/* -----------------------------------------*/
+/*                  Panel                   */
+/* -----------------------------------------*/
+
+.panel {
+  position:relative !important;
+  height:100%;
+  width:100%;
+  background:none;
+}
+
+.panel.ui-active {}
+
+.panel-container {}
+
+.panel-single {
+  height:100%;
+  width:100%;
+}
+
+/* horizontal panel*/
+
+.panel-container-horizontal {
+  height:100%;
+  width:100%;
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  /* avoid browser level touch actions */
+  xtouch-action: none;
+}
+
+.panel-left {
+  flex: 0 0 auto;
+  width: 50%;
+  height:100%;
+  min-height: 200px;
+  min-width: 2%;
+  max-width: 98%;
+  white-space: nowrap;
+  color: white;
+}
+
+/* vertical panel */
+
+.panel-container-vertical {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.panel-top {
+  flex: 0 0 auto;
+  height:50%;
+  min-height: 20px;
+  max-height: 98%;
+  width: 100%;
+  white-space: nowrap;
+  color: white;
+}
+
+.panel-bottom {
+  flex: 1 1 auto;
+  min-height: 10%;
+}
+
+.panel-split-blocker {
   position:absolute;
   top:0;
   right:0;
+  bottom:0;
   left:0;
-  bottom:0;
-  margin:5px;
-}
-
-div.ui-iris-image-overlay .image-overlay-header{
-  position:absolute;
-  width:100%;
-
-  opacity:1;
+  box-shadow: 0px 0px 4px 0px white;
   background-color:black;
+  opacity:0.2;
+  z-index:10000;
 }
 
-div.ui-iris-image-overlay .ui-btn-overlay{
-  position:absolute;
-  bottom:0;
-  right:1.5em;
-  z-index:50;
+.panel-container-vertical >  .panel-split-blocker {
+  cursor: row-resize;
+}
 
+.panel-container-horizontal > .panel-split-blocker {
+  cursor: col-resize;
+}
+
+.panel-context-menu {
+  position:absolute;
+  z-index:200;
+  top:1em;
+}
+
+.panel-context-btn {
+  z-index:200;
+  color:grey;
+  opacity:0.8;
+  position:absolute;
+  left:1em;
+  text-shadow:none;
   cursor:pointer;
-  height:1.8em;
-  width:1.3em;
-  padding-left:8px;
-  padding-top:2px;
-  color:white;
-  background-color:#2174AC;
-  font-size:1.5em;
 }
 
-div.ui-iris-image-overlay .ui-btn-overlay:hover{
-  background-color:  #1d5987;
-  -webkit-box-shadow: 0px 2px 10px -2px #BBB;
-  -moz-box-shadow: 0px 2px 10px -2px #BBB;
-  box-shadow: 0px 2px 10px -2px #BBB;
-
+.panel-context-btn:hover {
+  opacity:0.9;
+  color:grey;
+  text-shadow: 1px 1px 1px grey;
 }
 
-div.ui-iris-image-overlay table{
-  width:90%;
-  max-width:450px;
-  margin-left:auto;
-  margin-right:auto;
-  margin-top:2em;
-  margin-bottom:auto;
+.splitter {
+  position:relative;
+  flex: 0 0 auto;
+  background:none;
+  background-color:#333;
+  z-index:10;
 }
 
-div.ui-iris-image-overlay .image-overlay-icon{
-  position:absolute;
-  top:-15px;
-  font-size:35px;
-  left:-10px;
-  z-index:80;
+.splitter-vertical {
+  width: 2px;
+  height:100%;
+  cursor: col-resize;
 }
 
-
-.ui-image-supersize div.ui-iris-image-overlay .image-overlay-icon{
-  top:15px;
-  left:15px;
-}
-
-.ui-image-supersize div.ui-iris-image-overlay table{
-  margin-top:15% !important;
-}
-
-div.ui-iris-image-overlay input,div.ui-iris-image-overlay textarea, div.ui-iris-image-overlay select{
+.splitter-horizontal {
+  height: 2px;
   width:100%;
+  cursor: row-resize;
 }
 
-div.ui-iris-image-overlay table td .ui-empty-block-wrapper{
+.splitter-visual-handle {
   display:none;
   position:absolute;
-  top: 0;
-  left:0;
+  background-color:grey;
+  opacity:0.3;
+}
+
+.splitter-horizontal .splitter-visual-handle {
+  top:-5px;
+  height:12px;
+  width:100%;
+  box-shadow: 0px 0px 16px 0px white;
+}
+
+.splitter-vertical .splitter-visual-handle {
+  left:-5px;
+  width:12px;
+  height:100%;
+  box-shadow: 0px 0px 16px 0px white;
+}
+
+.panel-right {
+  flex: 1 1 auto;
+  width: 100%;
+}
+
+
+/* -----------------------------------------*/
+/*              Panel Content               */
+/* -----------------------------------------*/
+
+.panel-content {
+  height: 100%;
+  width: 100%;
+  opacity:1;
+  text-align:center;
+  font-size:3em;
+}
+
+
+.panel-content.visible {
+  -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
+  -webkit-animation-fill-mode:forwards; /*Chrome 16+, Safari 4+*/
+  -moz-animation: fadein 2s; /* Firefox < 16 */
+  -moz-animation-fill-mode:forwards; /*FF 5+*/
+  -ms-animation: fadein 2s; /* Internet Explorer */
+  -ms-animation-fill-mode:forwards; /*IE 10+*/
+  -o-animation: fadein 2s; /* Opera < 12.1 */
+  -o-animation-fill-mode:forwards; /*Not implemented yet*/
+  animation: fadein 2s;
+  animation-fill-mode:forwards; /*when the spec is finished*/
+}
+
+@keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Opera < 12.1 */
+@-o-keyframes fadein {
+  from { opacity: 0;}
+  to   { opacity: 1; }
+}
+
+.panel-content.panel-blocked {
+  filter: blur(5px);
+  -webkit-filter: blur(5px);
+  transition: 0.3s filter linear;
+  -webkit-transition: 0.3s -webkit-filter linear;
+  -moz-transition: 0.3s -moz-filter linear;
+  -ms-transition: 0.3s -ms-filter linear;
+  -o-transition: 0.3s -o-filter linear;
+}
+
+.panel-content.panel-not-selected {
+  filter: blur(5px);
+  -webkit-filter: blur(5px);
+  transition: 0.2s filter linear;
+  -webkit-transition: 0.2s -webkit-filter linear;
+  -moz-transition: 0.2s -moz-filter linear;
+  -ms-transition: 0.2s -ms-filter linear;
+  -o-transition: 0.2s -o-filter linear;
+}
+
+
+/* -----------------------------------------*/
+/*             panel settings               */
+/* -----------------------------------------*/
+
+
+.panel-settings {
+  z-index:200;
+  position:absolute;
+  top:0;
   right:0;
   bottom:0;
-  background-color:#2174AC;
-  opacity:0.5;
+  left:0;
+  background:none;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
 }
 
-div.ui-iris-image-overlay table td a.ui-link-iris{
-  color:white;
-  text-decoration:none;
+.panel-settings-diag {
+  opacity:0.85;
+  position:relative;
+  margin:0 auto;
+  min-width:276px;
+  max-width:900px;
+  border-top-right-radius: 0.3em;
+  border-top-left-radius: 0.3em;
+  background:lightgrey;
+  z-index:50;
+  box-shadow: 1px 1px 12px 1px grey;
+}
+
+.panel-settings-diag h3 {
+  padding-left:1em;
 }
 
 
-div.ui-iris-image-overlay table td a.ui-link-iris:hover{
-  color:#1d5987 ;
+.panel-settings-diag input {
+  width:20em;
 }
 
-.image-container {
-  width:100%;
+.panel-settings-diag .settings-content {
+  padding:0 1em 2em 1em;
+}
+
+.panel-settings-diag .panel-settings-footer {
+  text-align:right;
+  height:3em;
+  padding-left:0.5em;
+  background-color:grey;
+}
+.panel-settings-diag .panel-settings-footer .panel-settings-btn {
+  display:inline-block;
+  margin-left:0.25em;
   height:100%;
+  line-height:3em;
+  padding:0 1em 0 1em;
+  color:white;
+  cursor:pointer;
+}
+.panel-settings-diag .panel-settings-footer .panel-settings-btn:hover {
+  text-shadow: 1px 1px 1px lightgrey;
+}
+
+.panel-settings-diag .panel-settings-footer .panel-settings-btn:active {
+  text-shadow: 1px 1px 1px darkgrey;
+}
+
+.panel-settings-diag .panel-settings-footer .panel-settings-btn:not(:first-child) {
+  border-left:1px dashed white;
 }
 
 
-.ui-info-link{
-  cursor:info;
+/* -----------------------------------------*/
+/*                 Buttons                  */
+/* -----------------------------------------*/
+
+
+.layout-btn {
+  position:absolute;
+  background-color:none;
+  top:1em;
+  right:2em;
+  height:2em;
+  width:2em;
+  border: 1px solid grey;
+  z-index:200;
+  border-radius:0.5em;
+  text-align:center;
+  cursor:pointer;
 }
 
-.ui-info-link:hover{
-  color:#1d5987 ;
+.layout-btn:hover {
+  text-shadow: 1px 1px 1px grey;
+  box-shadow: 0px 0px 4px 0px lightgrey;
 }
 
+.layout-btn .fa {
+  color:grey;
+  font-size:1em;
+  margin:0.5em;
+}
 
+.layout-ui-container {
+  position:absolute;
+  z-index:10000;
+  height:5em;
+  width:5em;
+  top:0;
+  right:0;
+}
 
-/*|****************************************************************|
-  |                       user response                            |
-  |----------------------------------------------------------------|
-  | - StyleClasses used to give the user certain callbacks on      |
-  |   interaction. Currently this targets the ability of the       |
-  |   browser to be css3 compliant.                                |
-  |   Therefore no MS IE < 11                                      |
-  |________________________________________________________________|*/
-
-
-    .ui-state-pulse{
-        -webkit-animation: color-change 1s infinite;
-        -moz-animation: color-change 1s infinite;
-        -o-animation: color-change 1s infinite;
-        -ms-animation: color-change 1s infinite;
-        animation: color-change 1s infinite;
-    }
-
-    @-webkit-keyframes color-change {
-        0% { color: white; }
-        50% { color: #E4002C; }
-        100% { color: white; }
-    }
-
-    @-moz-keyframes color-change {
-        0% { color: white; }
-        50% { color: #E4002C; }
-        100% { color: white; }
-    }
-
-    @-ms-keyframes color-change {
-        0% { color: white; }
-        50% { color: #E4002C; }
-        100% { color: white; }
-    }
-
-    @-o-keyframes color-change {
-        0% { color: white; }
-        50% { color: #E4002C; }
-        100% { color: white; }
-    }
-
-    @keyframes color-change {
-        0% { color: white; }
-        50% { color: #E4002C; }
-        100% { color: white; }
-    }
-
-    @keyframes loadingImage {
-        0 {width: 2vmin;}
-        50% {width: 6vmin;}
-        100% {width: 2vmin;}
-    }
-
-    .load-image-indicator{
-      position:absolute;
-      width:100%;
-      height:100%;
-      text-align:center;
-      left:0;
-      top:0;
-      z-index:0;
-    }
-
-    .load-image-caption{
-      opacity:0.2;
-      margin-left:-1em;
-      position:absolute;
-      left:50%;
-      text-align:center;
-      top: 50%;
-      z-index:1;
-    }
-
-    .load-image-caption>span{
-      font-size:18px;  /*fallback*/
-      font-size:2vmin;
-    }
-
-    .load-image-indicator .line:nth-last-child(1) {animation: loadingImage 1.5s 1s infinite;}
-    .load-image-indicator .line:nth-last-child(2) {animation: loadingImage 1.5s .5s infinite;}
-    .load-image-indicator .line:nth-last-child(3) {animation: loadingImage 1.5s 0s infinite;}
-
-    .line {
-      display: inline-block;
-      width: 2vmin;
-      height: 3vmin;
-      border-radius: 5px;
-      margin-right:5px;
-      background-color:#A9A9A9;
-      opacity:0.5;
-    }
-
-    /* The info splash dialog */
-    .ui-splash-info{
-      display:none;
-      opacity:0.55;
-      color:white;
-      background-color:grey;
-      width:600px;
-      position:absolute;
-      top:50%;
-      left:50%;
-      margin-left:-300px;
-      margin-top:-125px;
-      box-shadow: 2px 2px 5px #333;
-      z-index:55;
-    }
-
-
-
-/*|****************************************************************|
-  |                   table styles in general                      |
-  |----------------------------------------------------------------|
-  | - StyleClasses used to beautify any application`s dataTable    |
-  |________________________________________________________________|*/
-
-
-    .ui-tablerow-even {
-      background-color:#eeeeee;
-    }
-
-    .ui-tablerow-odd {
-      background-color: #fdfdfd;
-    }
-
-    .ui-tablerow-btn {
-      width:25px;
-      height:25px;
-      color:white;
-      text-align:center;
-      float:left;
-      background-color:#2174AC;
-      font-size:1.6em;
-      cursor:pointer;
-      margin-right:0.1em;
-    }
-
-    table tr{
-      height:25px;
-    }
-
+.layout-logo {
+  position:absolute;
+  background:none;
+  top:0.8em;
+  right:0.8em;
+  height:4em;
+  width:4em;
+  z-index:200;
+  opacity:0.8;
+  background-repeat:no-repeat;
+  background-size:contain;
+  background-image: url('data:image/png;base64,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');
+}

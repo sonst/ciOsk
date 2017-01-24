@@ -1,12 +1,13 @@
 var LayoutPanelMarkup = require('../view/LayoutPanelMarkup');
 var LayoutPanelAction = require('../view/LayoutPanelAction');
+var Utils             = require('../util/Utils');
 var $                 = require('jquery');
 
 var LayoutPanel = function(parentSelector, options){
 
   var instance = this,
       fullscreen = false,
-      options = options || {
+      options = Utils.mergeObjects( options , {
         uiContent:              true,
         idLayout:               'pageLayout',
         idBtnFullscreen:        'layoutBtnFs',
@@ -15,7 +16,7 @@ var LayoutPanel = function(parentSelector, options){
         classLayoutUIContainer: 'layout-ui-container',
         classLayoutButton:      'layout-btn',
         classLayoutLogo:        'layout-logo'
-      };
+      });
 
   this.actions = null;
 
@@ -39,6 +40,14 @@ var LayoutPanel = function(parentSelector, options){
   this.destroy = function(){
     instance.actions.removeEvents();
     $('#'+options.idLayout).remove();
+  };
+
+  this.getElement = function(){
+    return $('#'+options.idLayout);
+  };
+
+  this.getOptions = function(){
+    return options;
   };
 
   instance.init();

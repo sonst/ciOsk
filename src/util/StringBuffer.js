@@ -4,8 +4,7 @@
  *  of array join to prevent continous copying of immutable objects while appending.
  */
 var StringBuffer = function() {
-  this.buffer = [];
-  this.index = 0;
+  this.clear();
 };
 
 /**
@@ -29,5 +28,24 @@ StringBuffer.prototype.append = function(s){
 StringBuffer.prototype.toString = function() {
   return this.buffer.join('');
 }
+
+
+/**
+ *  This function will concatenate the buffered strings using the given delimiter
+ *  @return  The concatenated String
+ */
+StringBuffer.prototype.join = function(delimiter){
+  return this.buffer.join(delimiter);
+};
+
+
+/**
+ *  This function will clear the underlying buffer
+ */
+StringBuffer.prototype.clear = function(){
+  this.buffer = [];
+  this.index = 0;
+};
+
 
 module.exports = StringBuffer;

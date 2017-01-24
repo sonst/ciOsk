@@ -8,21 +8,25 @@
   },
   "scripts": {
     "test": "make test",
-    "build": "webpack --display-error-details ./src/ciOsk.js ./dist/ciOsk.bundle.js",
-    "build-release": "PROD_ENV=1 webpack  ./src/ciOsk.js ./dist/ciOsk.bundle.js",
-    "refresh": "REFRESH_ENV=1 webpack  ./src/ciOsk.js ./dist/ciOsk.bundle.js"
+    "build": "webpack --display-error-details",
+    "build-release": "PROD_ENV=1 webpack --verbose",
+    "refresh": "REFRESH_ENV=1 webpack",
+    "prebuild": "make test",
+    "prebuild-release": "make test"
   },
   "author": "soean steiger <soean.steiger@googlemail.com>",
   "license": "MIT",
   "devDependencies": {
     "chai": "^3.5.0",
+    "copy-webpack-plugin": "^4.0.0",
     "jsdom": "^9.9.1",
     "mocha": "^3.1.0",
-    "mocha-jsdom": "^1.1.0"
+    "mocha-jsdom": "^1.1.0",
+    "webpack": "^1.14.0"
   },
   "dependencies": {
-    "copy-webpack-plugin": "^4.0.0",
+    "i18next": "^5.0.0",
     "jquery": "^3.1.1",
-    "webpack": "^1.13.3"
+    "jquery-ui-dist": "^1.12.1"
   }
 }

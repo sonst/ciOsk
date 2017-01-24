@@ -25,7 +25,13 @@ var PanelMarkup = function(options){
     classPanelContextMenu:     'panel-context-menu',
     classPanelContextMenuBtn:  'panel-context-btn',
     classSplitterVisualHandle: 'splitter-visual-handle',
-    classSplitPanelBlocker:    'panel-split-blocker'
+    classSplitPanelBlocker:    'panel-split-blocker',
+
+    classBtnRemove:            'btn-panel-remove',
+    classBtnSplitVert:         'btn-panel-split-vertical',
+    classBtnSplitHoriz:        'btn-panel-split-horizontal',
+    classBtnAddContent:        'btn-panel-add'
+
   };
 }
 
