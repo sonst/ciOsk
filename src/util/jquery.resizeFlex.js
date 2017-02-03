@@ -3,6 +3,7 @@ var jQuery = require('jquery');
 
 /*
 jquery-resizeFlex
+@author sos
 
 adaption of jquery-resizable:
 
@@ -63,7 +64,9 @@ Licensed under MIT License
         $handle.css("touch-action", "none");
 
       $el.addClass("resizeFlex");
-      $handle.bind('mousedown.rsz touchstart.rsz', startDragging);
+
+      $handle.off('mousedown.rsz touchstart.rsz')
+             .on('mousedown.rsz touchstart.rsz', startDragging);
 
       function noop(e) {
         e.stopPropagation();
@@ -84,13 +87,15 @@ Licensed under MIT License
         }
         opt.dragFunc = doDrag;
 
-        $(document).bind('mousemove.rsz', opt.dragFunc);
-        $(document).bind('mouseup.rsz', stopDragging);
+        $(document).on('mousemove.rsz', opt.dragFunc);
+        $(document).on('mouseup.rsz', stopDragging);
+
         if (window.Touch || navigator.maxTouchPoints) {
-          $(document).bind('touchmove.rsz', opt.dragFunc);
-          $(document).bind('touchend.rsz', stopDragging);
+          $(document).on('touchmove.rsz', opt.dragFunc);
+          $(document).on('touchend.rsz', stopDragging);
         }
-        $(document).bind('selectstart.rsz', noop); // disable selection
+
+        $(document).on('selectstart.rsz', noop); // disable selection
       }
 
       function doDrag(e) {
@@ -119,14 +124,14 @@ Licensed under MIT License
         e.stopPropagation();
         e.preventDefault();
 
-        $(document).unbind('mousemove.rsz', opt.dragFunc);
-        $(document).unbind('mouseup.rsz', stopDragging);
+        $(document).off('mousemove.rsz', opt.dragFunc);
+        $(document).off('mouseup.rsz', stopDragging);
 
         if (window.Touch || navigator.maxTouchPoints) {
-          $(document).unbind('touchmove.rsz', opt.dragFunc);
-          $(document).unbind('touchend.rsz', stopDragging);
+          $(document).off('touchmove.rsz', opt.dragFunc);
+          $(document).off('touchend.rsz', stopDragging);
         }
-        $(document).unbind('selectstart.rsz', noop);
+        $(document).off('selectstart.rsz', noop);
 
         // reset changed values
         $el.css("transition", startTransition);
