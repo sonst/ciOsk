@@ -6,7 +6,6 @@ var $                 = require('jquery');
 var LayoutPanel = function(parentSelector, options){
 
   var instance = this,
-      fullscreen = false,
       options = Utils.mergeObjects( options , {
         uiContent:              true,
         idLayout:               'pageLayout',
@@ -24,7 +23,7 @@ var LayoutPanel = function(parentSelector, options){
 
   this.init = function(){
     instance.markup =  new LayoutPanelMarkup(options);
-    instance.actions = new LayoutPanelAction(instance, options);
+    instance.actions = new LayoutPanelAction(options);
     instance.initDom();
     instance.actions.initEvents();
   };

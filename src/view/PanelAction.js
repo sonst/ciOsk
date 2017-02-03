@@ -1,10 +1,13 @@
 var PanelSplitType = require('../util/PanelSplitType');
 var PanelMarkup    = require('./PanelMarkup');
+var Action         = require('./Action');
 var $              = require('jquery');
 
 require('../util/jquery.resizeFlex');
 
-var PanelAction = function(panelInstance, options){
+var PanelAction = function(elementId, options){
+
+  PanelAction.super_.apply(this);
 
   var instance       = this,
       panelMarkup    = new PanelMarkup(),
@@ -29,7 +32,7 @@ var PanelAction = function(panelInstance, options){
 
   this.attachContextMenuEvents = function(){
     detachContextMenuEvents();
-    panelInstance.getElement().on('mouseenter.panel', function(e, immediate){
+    getPanelElement().on('mouseenter.panel', function(e, immediate){
       e.stopPropagation();
       var $this = $(this);
       instance.openCtxtMenu(immediate);
@@ -43,18 +46,7 @@ var PanelAction = function(panelInstance, options){
     });
   };
 
-  this.initResizablePanel = function(){
-    var panelType = panelInstance.getPanelType(),
-        container = panelInstance.getContainer(),
-        selector  = panelType == PanelSplitType.VERTICAL ? options.classPanelLeft : options.classPanelTop,
-        splitter  = container.find('.splitter').first();
-
-    container.find('.'+selector).first().resizeFlex({
-      handleSelector: '#'+panelInstance.getId()+'Splitter',
-      resizeHeight: panelType === PanelSplitType.HORIZONTAL,
-      resizeWidth: panelType === PanelSplitType.VERTICAL
-    });
-
+  var attachSplitterHandleEvents = function(splitter){
     splitter.off('mouseover.panel').on('mouseover.panel',function() {
       $(this).find('.splitter-visual-handle').stop().fadeIn(120);
     }).off('mouseleave.panel').on('mouseleave.panel', function() {
@@ -64,10 +56,10 @@ var PanelAction = function(panelInstance, options){
       }
       $this = null;
     });
-
     splitter.off('mousedown.panelSplitter').on('mousedown.panelSplitter', function(){
       var $this = $(this),
-          $panel = panelInstance.getElement();
+          $panel = $this.closest('.panel-container');
+
       $this.addClass('ui-mouse-down');
       $panel.append(panelMarkup.getSplitPanelBlocker());
       $panel.find('.panel-split-blocker').stop().fadeIn('fast');
@@ -75,8 +67,37 @@ var PanelAction = function(panelInstance, options){
       $panel = null;
       $this = null;
     });
+  };
 
+  var attachResizableEvents = function(resizable){
+    var resizeWidth  = resizable.attr('class').indexOf('panel-left') !== -1;
+    var resizeHeight = resizable.attr('class').indexOf('panel-top') !== -1;
+    var splitter     = resizable.siblings('.splitter');
+    resizable.resizeFlex({
+      handleSelector: '#'+splitter.attr('id'),
+      resizeHeight: resizeHeight,
+      resizeWidth: resizeWidth
+    });
+    attachSplitterHandleEvents(splitter);
+  };
 
+  this.initResizablePanel = function(){
+    var panelsH = $('.panel-left');
+    var panelsV = $('.panel-top');
+
+    panelsH.each(function(){
+      var $this = $(this);
+      attachResizableEvents($this);
+      $this = null;
+    });
+    panelsV.each(function(){
+      var $this = $(this);
+      attachResizableEvents($this);
+      $this = null;
+    });
+
+    panelsH = null;
+    panelsV = null;
 
     //
     // FIXME: the event should be attached to the rootPanel !!!
@@ -97,26 +118,21 @@ var PanelAction = function(panelInstance, options){
   };
 
   this.openCtxtMenu = function(immediate){
-    var isRootPanel = false;
+    var isRootPanel = getPanelElement().closest('.panel-container').hasClass('root-panel');
     mouseOverPanel = true;
-    if (panelInstance.getParent()==null){
-      isRootPanel = true;
-    }
-    mouseOverPanel = true;
-    if(panelInstance.getElement().find('.panel-context-menu').length == 0){
-      panelInstance.getElement().prepend(panelMarkup.getCtxtMenuMarkup(isRootPanel));
+    if(getPanelElement().find('.panel-context-menu').length == 0){
+      getPanelElement().prepend(panelMarkup.getCtxtMenuMarkup(isRootPanel));
       attachContextBtnEvents();
-
       if(immediate){
-        panelInstance.getElement().find('.panel-context-menu').stop(true,true).show();
+        getPanelElement().find('.panel-context-menu').stop(true,true).show();
       } else{
-        panelInstance.getElement().find('.panel-context-menu').stop(true,true).fadeIn('fast');
+        getPanelElement().find('.panel-context-menu').stop(true,true).fadeIn('fast');
       }
     }
   };
 
   this.closeCtxtMenu = function(){
-    panelInstance.getContainer().find('.panel-context-menu').stop(true).fadeOut('fast',function(){
+    getPanelElement().find('.panel-context-menu').stop(true).fadeOut('fast',function(){
       var $this = $(this);
       detachContextBtnEvents();
       $this.remove();
@@ -125,15 +141,15 @@ var PanelAction = function(panelInstance, options){
   };
 
   this.removeCtxtMenu = function(){
-    var ctxtMenu = panelInstance.getContainer().find('.panel-context-menu');
+    var ctxtMenu = getPanelElement().find('.panel-context-menu');
     ctxtMenu.hide();
     detachContextBtnEvents();
     ctxtMenu.remove();
   };
 
   var detachContextMenuEvents = function(){
-    panelInstance.getElement().off('mouseover.panel');
-    panelInstance.getElement().off('mouseleave.panel');
+    getPanelElement().off('mouseover.panel');
+    getPanelElement().off('mouseleave.panel');
     detachContextBtnEvents();
   };
 
@@ -141,41 +157,43 @@ var PanelAction = function(panelInstance, options){
     $('.'+options.classBtn).off();
   };
 
-
   var attachContextBtnEvents = function(){
     attachSplitContentEvents();
     attachAddContentEvents();
-    attachRemoveContentEvents();
+    attachRemoveEvents();
   };
 
   var attachAddContentEvents = function(){
-    panelInstance.getElement().find('.'+options.classBtnAddContent).off(options.eventClick).on(options.eventClick, function(){
-      new PanelSettings(panelInstance);
+    getPanelElement().find('.'+options.classBtnAddContent).off(options.eventClick).on(options.eventClick, function(){
+      //new PanelSettings(panelInstance);
     });
   };
 
-  var attachRemoveContentEvents = function(){
-    panelInstance.getElement().find('.'+options.classBtnRemove).off(options.eventClick).on(options.eventClick, function(){
+  var attachRemoveEvents = function(){
+    getPanelElement().find('.'+options.classBtnRemove).off(options.eventClick).on(options.eventClick, function(){
       var $this = $(this);
-      panelInstance.remove();
+      instance.invoke('remove');
       $this = null;
     });
   };
 
   var attachSplitContentEvents = function(){
-    panelInstance.getElement().find('.'+options.classBtnSplitContentH).off(options.eventClick).on(options.eventClick, function(){
-      panelInstance.splitPanel(PanelSplitType.HORIZONTAL);
+    getPanelElement().find('.'+options.classBtnSplitContentH).off(options.eventClick).on(options.eventClick, function(){
+      instance.invoke('splitPanel', PanelSplitType.HORIZONTAL);
+      //panelInstance.splitPanel();
     });
-    panelInstance.getElement().find('.'+options.classBtnSplitContentV).off(options.eventClick).on(options.eventClick, function(){
-      panelInstance.splitPanel(PanelSplitType.VERTICAL);
+    getPanelElement().find('.'+options.classBtnSplitContentV).off(options.eventClick).on(options.eventClick, function(){
+      instance.invoke('splitPanel', PanelSplitType.VERTICAL);
+      //panelInstance.splitPanel(PanelSplitType.VERTICAL);
     });
   };
 
-  var mondrianify = function(panel){
-    var colors = ['red','blue','yellow','black','lightgrey', 'white'];
-    var index = Math.floor((Math.random() * 6) );
-    panel.css('background-color',colors[index]);
+  var getPanelElement = function(){
+    return $('#'+elementId);
   };
+
 }
+
+PanelAction.super_ = Action;
 
 module.exports = PanelAction;

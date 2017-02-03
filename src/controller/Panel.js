@@ -1,21 +1,25 @@
-var PanelSplitType = require('../util/PanelSplitType');
-var PanelMarkup    = require('../view/PanelMarkup');
-var PanelAction    = require('../view/PanelAction');
-var $              = require('jquery');
+var PanelSplitType  = require('../util/PanelSplitType');
+var PanelMarkup     = require('../view/PanelMarkup');
+var PanelAction     = require('../view/PanelAction');
+var PanelContent    = require('../controller/PanelContent');
+var ActionListener  = require('./ActionListener');
+var $               = require('jquery');
 
 
 var Panel = function(id, splitType, parent){
+
+  Panel.super_.apply(this);
 
   var container    = null,
       panelChildA  = null,
       panelChildB  = null,
       parent       = parent || null,
-
-      panelMarkup  = null,
-      panelAction  = null,
-      panelContent = null,
-
       instance     = this;
+
+
+  this.panelMarkup  = null;
+  this.panelAction  = null;
+  this.panelContent = null;
 
   var options = {
     classPanelLeft:          'panel-left',
@@ -29,23 +33,33 @@ var Panel = function(id, splitType, parent){
   };
 
   this.init = function(){
-    splitType   = splitType ? splitType : PanelSplitType.NONE;
-    panelMarkup = new PanelMarkup();
+    splitType = splitType ? splitType : PanelSplitType.NONE;
     initDOM();
     initActions();
   };
 
   var initDOM = function(){
-    container.append(panelMarkup.getPanelContainer(id, splitType));
+    instance.panelMarkup = new PanelMarkup();
+    container.append(instance.panelMarkup.getPanelContainer(instance.getId(), splitType, instance.getParent() == null));
   };
 
   var initActions = function(){
-    panelAction = new PanelAction(instance);
+
+    instance.panelAction = new PanelAction(instance.getId());
+    instance.subscribeAction(instance, instance.panelAction);
+
     if (splitType != PanelSplitType.NONE){
-      panelAction.initResizablePanel();
+      // RESIZABLE should not be a panel action!!
+      instance.panelAction.initResizablePanel();
     } else {
-      panelAction.attachContextMenuEvents();
+      instance.panelAction.attachContextMenuEvents();
     }
+  };
+
+  var mondrianify = function(panel){
+    var colors = ['red','blue','yellow','black','lightgrey', 'white'];
+    var index = Math.floor((Math.random() * 6) );
+    panel.css('background-color',colors[index]);
   };
 
   this.addContent = function(markup){
@@ -55,70 +69,94 @@ var Panel = function(id, splitType, parent){
     }
   };
 
+  var createChildPanelInstance = function(panelId, idAddition){
+    var panel = null;
+    var panelElement = null;
+
+    panel = new Panel(panelId + idAddition, PanelSplitType.NONE, instance);
+    panel.setContainer($('#'+panelId+'_pnl'+idAddition));
+    panel.init();
+
+    return panel;
+  };
+
   this.splitPanel = function(splitPanelType){
-    var panelElementA = null,
-        panelElementB = null;
+    console.log('splitttttttt');
+
     splitType = splitPanelType;
-    panelAction.removeEvents();
-    panelAction.removeCtxtMenu();
-
-    instance.getElement().replaceWith(panelMarkup.getPanelContainer(id, splitType));
-
-    panelElementA = $('#'+id+'_pnl0');
-    panelChildA = new Panel(id + '0', PanelSplitType.NONE, instance);
-    panelChildA.setContainer(panelElementA);
-    panelChildA.init();
-
-    panelElementB = $('#'+id+'_pnl1');
-    panelChildB = new Panel(id + '1', PanelSplitType.NONE, instance);
-    panelChildB.setContainer(panelElementB);
-    panelChildB.init();
-
-    panelAction.initResizablePanel();
-    panelChildA.getElement().trigger('mouseenter.panel', true);
-
-    if(panelContent != null) {
-      panelChildA.addPanelContent(panelContent.getUrl());
-      panelContent = null;
+    instance.panelAction.removeEvents();
+    instance.panelAction.removeCtxtMenu();
+    instance.getElement().replaceWith(instance.panelMarkup.getPanelContainer(instance.getId(), splitType, false));
+    panelChildA = createChildPanelInstance(instance.getId(), 0);
+    panelChildB = createChildPanelInstance(instance.getId(), 1);
+    instance.panelAction.initResizablePanel();
+    if(instance.panelContent != null) {
+      panelChildA.addPanelContent(instance.panelContent.getUrl());
+      instance.panelContent = null;
     }
-
   };
 
   this.remove = function(){
-    if(parent && parent.hasChildren()){
+    if(parent != null && parent.hasChildren()){
       parent.removeChild(instance);
     }
   };
 
-  this.removeChild = function(pnl){
-    var notSelected = null,
-        cachedId    = null;
+  var _replaceDOM = function(panel, highlight){
+    if(highlight){
+      panel.getElement().effect('highlight', { color: "#303030" }, 600);
+    }
+    var newElement = panel.getElement();
+    instance.getElement().replaceWith(newElement);
+    if(instance.getParent() == null){
+      newElement.addClass('root-panel');
+    }
+  };
 
-    notSelected = instance.getChild(pnl);
-
-    if(notSelected != null){
-      notSelected.getElement().effect('highlight', { color: "#303030" }, 600);
-      instance.getElement().replaceWith(notSelected.getElement());
-      panelAction.removeEvents();
-      cachedId = instance.getId();
-      notSelected.setParent(instance.getParent());
-      instance = notSelected;
-
-      if(instance.getParent() != null){
-        var tmpChildren = instance.getParent().getChildren();
-        if(instance.getParent().getChildren()[0].getId() == cachedId){
-          tmpChildren[0] = instance;
-        }
-        if(instance.getParent().getChildren()[1].getId() == cachedId){
-          tmpChildren[1] = instance;
-        }
-        instance.getParent().setChildren(tmpChildren);
-      }
-
-      panelAction = new PanelAction(instance);
-
+  var _removeChild = function(pnl){
+    var children = instance.getChildren();
+    if(children[0] != null && children[0].getId() == pnl.getId()){
+      panelChildA = null;
+    } else if( children[1] != null && instance.getChildren()[1].getId() == pnl.getId()){
+      panelChildB = null;
     } else {
+      throw new Error(pnl + ' is not a child!');
+    }
+  };
+
+  this.removeChild = function(pnl){
+    var notSelectedChild = null,
+        selectedChild    = null,
+        cachedChildren   = [],
+        cachedId         = null;
+
+    selectedChild    = instance.getChild(pnl);
+    notSelectedChild = instance.getSibling(pnl);
+
+    selectedChild.panelAction.unsubscribeAll();
+
+    if(notSelectedChild == null){
       throw new Error('removed item has no sibling!');
+    }
+
+    _replaceDOM(notSelectedChild, true);
+    _removeChild(pnl);
+
+    notSelectedChild.setParent(instance.getParent());
+
+    cachedId = instance.getId();
+    instance = notSelectedChild;
+
+    if(instance.getParent() != null){
+      cachedChildren = instance.getParent().getChildren();
+      if(instance.getParent().getChildren()[0].getId() == cachedId){
+        cachedChildren[0] = instance;
+      }
+      if(instance.getParent().getChildren()[1].getId() == cachedId){
+        cachedChildren[1] = instance;
+      }
+      instance.getParent().setChildren(cachedChildren);
+      cachedChildren = [];
     }
   };
 
@@ -131,15 +169,15 @@ var Panel = function(id, splitType, parent){
   };
 
   this.hasPanelContent = function(){
-    return panelContent != null;
+    return instance.panelContent != null;
   };
 
   this.addPanelContent = function(url){
-    panelContent = new PanelContent(instance.getElement(),url);
+    instance.panelContent = new PanelContent(instance.getElement(),url);
   };
 
   this.setPanelContent = function(pc){
-    panelContent = pc;
+    instance.panelContent = pc;
   };
 
   this.isRootPanel = function(){
@@ -183,15 +221,22 @@ var Panel = function(id, splitType, parent){
     return [panelChildA, panelChildB];
   };
 
-  this.getChild = function(pnl){
-    var retVal = null;
+  this.getSibling = function(pnl){
     if(pnl.getId() === panelChildA.getId()) {
-      retVal = panelChildB;
+      return panelChildB;
+    } else if(pnl.getId() === panelChildB.getId()) {
+      return panelChildA;
     }
-    if(pnl.getId() === panelChildB.getId()) {
-      retVal = panelChildA;
+    return null;
+  };
+
+  this.getChild = function(pnl){
+    if(pnl.getId() === panelChildA.getId()) {
+      return panelChildA;
+    } else if(pnl.getId() === panelChildB.getId()) {
+      return panelChildB;
     }
-    return retVal;
+    return null;
   };
 
   this.setChildren = function(children){
@@ -200,5 +245,7 @@ var Panel = function(id, splitType, parent){
   };
 
 }
+
+Panel.super_ = ActionListener;
 
 module.exports = Panel;

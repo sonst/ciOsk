@@ -1,6 +1,9 @@
+var Action = require('./Action');
 var $ = require('jquery');
 
-var LayoutPanelAction = function(layoutInstance, options){
+var LayoutPanelAction = function(elementId, options){
+
+  LayoutPanelAction.super_.apply(this);
 
   var fullscreen = false,
       instance = this;
@@ -27,7 +30,7 @@ var LayoutPanelAction = function(layoutInstance, options){
 
   this.removeEvents = function(){
     detachHideCursorEvent();
-    $('#'+options.idBtnFullscreen).off('click.layout.fullscreen');
+    getElement().find('#'+options.idBtnFullscreen).off('click.layout.fullscreen');
     var uiContainer = $('.'+options.classLayoutUIContainer);
     uiContainer.off('mouseover.panelLayout');
     uiContainer.off('mouseleave.panelLayout');
@@ -40,7 +43,7 @@ var LayoutPanelAction = function(layoutInstance, options){
   };
 
   var attachFullscreenEvents = function(){
-    $('#'+options.idBtnFullscreen).off('click.layout.fullscreen').on('click.layout.fullscreen',function(){
+    getElement().find('#'+options.idBtnFullscreen).off('click.layout.fullscreen').on('click.layout.fullscreen',function(){
       instance.onClickFullscreenView(this);
     });
     attachFullscreenChangeEvents()
@@ -173,14 +176,14 @@ var LayoutPanelAction = function(layoutInstance, options){
   };
 
   var onChangeFullscreenState = function(){
-    if(document.webkitIsFullScreen == false){
+    if(document.webkitIsFullScreen === false){
       var $fullscreenBtn = $('#'+options.idBtnFullscreen);
       $fullscreenBtn.find('i').switchClass('fa-compress','fa-expand');
       $fullscreenBtn.removeClass(options.classActive);
       fullscreen = false;
       $fullscreenBtn = null;
     }
-    if(document.mozFullScreen == false){
+    if(document.mozFullScreen === false){
       $('#'+options.idBtnFullscreen).find('i').switchClass('fa-compress','fa-expand');
     }
     if(typeof document.msFullscreenElement != 'undefined' && document.msFullscreenElement != null){
@@ -188,6 +191,12 @@ var LayoutPanelAction = function(layoutInstance, options){
     }
   };
 
+  var getElement = function(){
+    return $('#'+options.idLayout);
+  };
+
 }
+
+LayoutPanelAction.super_ = Action;
 
 module.exports = LayoutPanelAction;

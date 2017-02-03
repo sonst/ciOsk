@@ -40,11 +40,15 @@ var PanelMarkup = function(options){
  *  Returns the panel`s container markup
  *  @param id {String} - The element id
  *  @param splitType {PanelSplitType} - The current splitType set
+ *  @param rootPanel {bool} - Whether this will be the root
  *  @return {String} the panel`s markup
  */
-PanelMarkup.prototype.getPanelContainer = function(id, splitType){
+PanelMarkup.prototype.getPanelContainer = function(id, splitType, rootPanel){
   var panelContainerClass = splitType == PanelSplitType.VERTICAL ? this.options.classPanelContainerHoriz : this.options.classPanelContainerVert,
       retVal = new StringBuffer();
+
+  panelContainerClass += rootPanel ? ' root-panel' : '';
+
   retVal.append('<div id="'+id+'" class="panel-container '+panelContainerClass+'">');
   if(PanelSplitType.NONE != splitType){
     retVal.append(this.getSplitPanel(id, splitType));
