@@ -67,6 +67,8 @@ input:focus {
 
 .panel {
   position:relative !important;
+  min-width:80px !important;
+  min-height:80px !important;
   height:100%;
   width:100%;
   background:none;
@@ -74,7 +76,10 @@ input:focus {
 
 .panel.ui-active {}
 
-.panel-container {}
+.panel-container {
+  min-width:80px !important;
+  min-height:80px !important;
+}
 
 .panel-single {
   height:100%;
