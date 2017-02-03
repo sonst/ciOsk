@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": " ciOsk ",
   "main": "./src/ciOsk.js",
+  "private": true,
   "directories": {
     "test": "test"
   },

@@ -1,4 +1,4 @@
-// init jsdom and environment
+  // init jsdom and environment
 require('../testUtils/jsDomBaseline');
 
 var describe          = require('mocha').describe,
@@ -12,7 +12,7 @@ var describe          = require('mocha').describe,
 
 describe('The Layout Panel', function () {
 
-  var layoutPnl,
+  var layoutPanel,
       options;
 
   beforeEach(function () {
@@ -26,41 +26,41 @@ describe('The Layout Panel', function () {
       classLayoutButton:      'layout-btn',
       classLayoutLogo:        'layout-logo'
     };
-    layoutPnl = new LayoutPanel('body', options);
+    layoutPanel = new LayoutPanel('body', options);
   });
 
-  afterEach(function(){
+  afterEach( function(){
     // destroy the DOM representation
-    layoutPnl.destroy();
+    layoutPanel.destroy();
   });
 
   it('gets instanciated correctly', function(){
-    expect(LayoutPanelAction.prototype.isPrototypeOf(layoutPnl.actions)).to.equal(true);
-    expect(LayoutPanelMarkup.prototype.isPrototypeOf(layoutPnl.markup)).to.equal(true);
-    expect(layoutPnl.getOptions()).to.deep.equal(options);
+    expect(LayoutPanelAction.prototype.isPrototypeOf(layoutPanel.actions)).to.equal(true);
+    expect(LayoutPanelMarkup.prototype.isPrototypeOf(layoutPanel.markup)).to.equal(true);
+    expect(layoutPanel.getOptions()).to.deep.equal(options);
   });
 
   it('returns the DOM element, calling getElement()', function(){
     var layoutBaseElem = $('#'+options.idLayout);
-    expect(layoutPnl.getElement().attr('id')).to.equal(layoutPnl.getOptions().idLayout);
+    expect(layoutPanel.getElement().attr('id')).to.equal(layoutPanel.getOptions().idLayout);
   });
 
   it('contains the application`s base element', function () {
-    expect(layoutPnl.getElement()).to.not.be.an('undefined');
-    expect(layoutPnl.getElement().length).to.equal(1);
-    expect(layoutPnl.getElement().attr('class')).to.contain(options.classLayout);
+    expect(layoutPanel.getElement()).to.not.be.an('undefined');
+    expect(layoutPanel.getElement().length).to.equal(1);
+    expect(layoutPanel.getElement().attr('class')).to.contain(options.classLayout);
   });
 
   it('shows the application`s ui container', function(){
-    var layoutUIElem = layoutPnl.getElement().find('.'+options.classLayoutUIContainer);
+    var layoutUIElem = layoutPanel.getElement().find('.'+options.classLayoutUIContainer);
     expect(layoutUIElem).to.not.be.an('undefined');
     expect(layoutUIElem.length).to.equal(1);
   });
 
   it('has a fullscreen button inside the ui container', function(){
-    var fsBtn = layoutPnl.getElement()
+    var fsBtn = layoutPanel.getElement()
                                 .find('.'+options.classLayoutUIContainer)
-                                .find($('#'+options.idBtnFullscreen));
+                                .find('#'+options.idBtnFullscreen);
 
     expect(fsBtn).to.not.be.an('undefined');
     expect(fsBtn.length).to.equal(1);
@@ -74,7 +74,7 @@ describe('The Layout Panel', function () {
   });
 
   it('attaches the ui container`s events', function(){
-    var layoutUIElem = layoutPnl.getElement().find('.'+options.classLayoutUIContainer);
+    var layoutUIElem = layoutPanel.getElement().find('.'+options.classLayoutUIContainer);
     var attachedEvents = $._data(layoutUIElem.get(0), 'events');
     expect(attachedEvents.mouseover.length).to.be.above(0);
     expect(attachedEvents.mouseout.length).to.be.above(0);
@@ -85,7 +85,7 @@ describe('The Layout Panel', function () {
   });
 
   it('attaches the fullscreen btn`s events', function(){
-    var uiBtn = layoutPnl.getElement().find('#'+options.idBtnFullscreen);
+    var uiBtn = layoutPanel.getElement().find('#'+options.idBtnFullscreen);
     var attachedEvents = $._data(uiBtn.get(0), 'events');
     expect(attachedEvents.click.length).to.be.above(0);
     expect(attachedEvents.click[0]).to.not.be.an('undefined');
@@ -93,29 +93,29 @@ describe('The Layout Panel', function () {
   });
 
   it('triggers the mouseover events', function(){
-    var uiContainer = layoutPnl.getElement().find('.'+options.classLayoutUIContainer);
+    var uiContainer = layoutPanel.getElement().find('.'+options.classLayoutUIContainer);
 
     // attaching mock vars
-    layoutPnl.actions.mouseOverPanelCalled = false;
-    layoutPnl.actions.mouseLeavePanelCalled = false;
+    layoutPanel.actions.mouseOverPanelCalled = false;
+    layoutPanel.actions.mouseLeavePanelCalled = false;
 
-    layoutPnl.actions.onMouseOverPanel = function(){
-      layoutPnl.actions.mouseOverPanelCalled = true;
+    layoutPanel.actions.onMouseOverPanel = function(){
+      layoutPanel.actions.mouseOverPanelCalled = true;
     };
     uiContainer.trigger('mouseover.panelLayout');
-    expect(layoutPnl.actions.mouseOverPanelCalled).to.equal(true);
-    expect(layoutPnl.actions.mouseLeavePanelCalled).to.equal(false);
+    expect(layoutPanel.actions.mouseOverPanelCalled).to.equal(true);
+    expect(layoutPanel.actions.mouseLeavePanelCalled).to.equal(false);
 
-    layoutPnl.actions.mouseOverPanelCalled = false;
-    layoutPnl.actions.mouseLeavePanelCalled = false;
+    layoutPanel.actions.mouseOverPanelCalled = false;
+    layoutPanel.actions.mouseLeavePanelCalled = false;
 
-    layoutPnl.actions.onMouseLeavePanel = function(){
-      layoutPnl.actions.mouseLeavePanelCalled = true;
+    layoutPanel.actions.onMouseLeavePanel = function(){
+      layoutPanel.actions.mouseLeavePanelCalled = true;
     };
 
     uiContainer.trigger('mouseleave.panelLayout');
-    expect(layoutPnl.actions.mouseOverPanelCalled).to.equal(false);
-    expect(layoutPnl.actions.mouseLeavePanelCalled).to.equal(true);
+    expect(layoutPanel.actions.mouseOverPanelCalled).to.equal(false);
+    expect(layoutPanel.actions.mouseLeavePanelCalled).to.equal(true);
   });
 
   it('cannot be generated twice using the same id without throwing an error', function(){
