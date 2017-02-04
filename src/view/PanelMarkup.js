@@ -1,5 +1,6 @@
 var PanelSplitType = require('../util/PanelSplitType');
-var StringBuffer = require('../util/StringBuffer');
+var StringBuffer   = require('../util/StringBuffer');
+var Utils          = require('../util/Utils');
 
 /**
  *  The split panel`s panel markup
@@ -7,7 +8,7 @@ var StringBuffer = require('../util/StringBuffer');
  *  @constructor
  */
 var PanelMarkup = function(options){
-  this.options = options || {
+  this.options = Utils.mergeObjects(options, {
     debug:                     false,
     idAdditionFirstPanel:      '_pnl0',
     idAdditionSecondPanel:     '_pnl1',
@@ -32,7 +33,7 @@ var PanelMarkup = function(options){
     classBtnSplitHoriz:        'btn-panel-split-horizontal',
     classBtnAddContent:        'btn-panel-add'
 
-  };
+  });
 }
 
 

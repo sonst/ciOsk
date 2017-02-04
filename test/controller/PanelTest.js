@@ -4,6 +4,8 @@ var describe       = require('mocha').describe,
     expect         = require('chai').expect,
     beforeEach     = require('mocha').beforeEach,
     $              = require('jquery'),
+    Action         = require('../../src/view/Action');
+    ActionListener = require('../../src/controller/ActionListener');
     LayoutPanel    = require('../../src/controller/LayoutPanel'),
     Panel          = require('../../src/controller/Panel'),
     PanelSplitType = require('../../src/util/PanelSplitType'),
@@ -83,7 +85,7 @@ describe('The Panel', function () {
     instance.init();
   }
 
-  describe('- object', function(){
+  describe('↳ object', function(){
 
     var util = null,
         panel;
@@ -99,18 +101,18 @@ describe('The Panel', function () {
     });
 
     it('does get instanciated correctly', function(){
+      expect(panel.constructor.super_).to.equal(ActionListener);
       expect(panel.getId()).to.equal(util.getPanelId());
       expect(panel.getPanelType()).to.equal(PanelSplitType.NONE);
-      expect(panel.isRootPanel()).to.equal(true);
       expect(panel.isRootPanel()).to.equal(true);
     });
 
     it('contains the aggregated objects of the correct type', function(){
       expect(PanelAction.prototype.isPrototypeOf(panel.panelAction)).to.equal(true);
+      expect(panel.panelAction.constructor.super_).to.equal(Action);
       expect(PanelMarkup.prototype.isPrototypeOf(panel.panelMarkup)).to.equal(true);
       expect(panel.panelContent).to.equal(null);
     });
-
 
     it('attaches it`s DOM element to the container`s DOM element ', function () {
       expect(panel.getElement()).to.not.be.an('undefined');
@@ -159,7 +161,7 @@ describe('The Panel', function () {
 
   });
 
-  describe('- DOM', function(){
+  describe('↳ DOM', function(){
 
     var util = null,
         panel;
@@ -189,7 +191,7 @@ describe('The Panel', function () {
   });
 
 
-  describe('- contextMenu',function(){
+  describe('↳ contextMenu',function(){
 
     var util = null,
         panel;

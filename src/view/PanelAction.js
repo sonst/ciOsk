@@ -1,10 +1,13 @@
 var PanelSplitType = require('../util/PanelSplitType');
 var PanelMarkup    = require('./PanelMarkup');
 var Action         = require('./Action');
+var flex           = require('../util/jquery.resizeFlex');
 var $              = require('jquery');
 
-require('../util/jquery.resizeFlex');
-
+/**
+ *  @constructor
+ *  @augments Action
+ */
 var PanelAction = function(elementId, options){
 
   PanelAction.super_.apply(this);
@@ -165,7 +168,7 @@ var PanelAction = function(elementId, options){
 
   var attachAddContentEvents = function(){
     getPanelElement().find('.'+options.classBtnAddContent).off(options.eventClick).on(options.eventClick, function(){
-      //new PanelSettings(panelInstance);
+      instance.invoke('showSettings');
     });
   };
 
@@ -180,11 +183,9 @@ var PanelAction = function(elementId, options){
   var attachSplitContentEvents = function(){
     getPanelElement().find('.'+options.classBtnSplitContentH).off(options.eventClick).on(options.eventClick, function(){
       instance.invoke('splitPanel', PanelSplitType.HORIZONTAL);
-      //panelInstance.splitPanel();
     });
     getPanelElement().find('.'+options.classBtnSplitContentV).off(options.eventClick).on(options.eventClick, function(){
       instance.invoke('splitPanel', PanelSplitType.VERTICAL);
-      //panelInstance.splitPanel(PanelSplitType.VERTICAL);
     });
   };
 

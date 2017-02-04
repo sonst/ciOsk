@@ -2,10 +2,17 @@ var PanelSplitType  = require('../util/PanelSplitType');
 var PanelMarkup     = require('../view/PanelMarkup');
 var PanelAction     = require('../view/PanelAction');
 var PanelContent    = require('../controller/PanelContent');
+var PanelSettings   = require('../controller/PanelSettings');
 var ActionListener  = require('./ActionListener');
 var $               = require('jquery');
 
-
+/**
+ *  @constructor
+ *  @augments ActionListener
+ *  @param id{String} - the container id
+ *  @param splitType{PanelSplitType} - the split type
+ *  @param [parent]{Panel} - The parent panel
+ */
 var Panel = function(id, splitType, parent){
 
   Panel.super_.apply(this);
@@ -15,7 +22,6 @@ var Panel = function(id, splitType, parent){
       panelChildB  = null,
       parent       = parent || null,
       instance     = this;
-
 
   this.panelMarkup  = null;
   this.panelAction  = null;
@@ -69,6 +75,12 @@ var Panel = function(id, splitType, parent){
     }
   };
 
+  this.showSettings = function(){
+    console.log('######showSettings');
+    var settings  = new PanelSettings();
+    instance.subscribeAction(instance, settings.actions);
+  };
+
   var createChildPanelInstance = function(panelId, idAddition){
     var panel = null;
     var panelElement = null;
@@ -81,8 +93,6 @@ var Panel = function(id, splitType, parent){
   };
 
   this.splitPanel = function(splitPanelType){
-    console.log('splitttttttt');
-
     splitType = splitPanelType;
     instance.panelAction.removeEvents();
     instance.panelAction.removeCtxtMenu();
