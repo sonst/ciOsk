@@ -8,7 +8,7 @@ var describe       = require('mocha').describe,
 
 describe('The Utils', function () {
 
-  describe('- function mergeObjects', function () {
+  describe('↳ function mergeObjects', function () {
     var objectOne,
         objectTwo;
 
@@ -37,7 +37,7 @@ describe('The Utils', function () {
 
   });
 
-  describe('- function isArray', function () {
+  describe('↳ function isArray', function () {
 
     it('returns true if the given is an array',function(){
       expect(Utils.isArray([1,2,3])).to.equal(true);

@@ -8,7 +8,7 @@ var describe       = require('mocha').describe,
 
 describe('The StringBuffer', function () {
 
-  describe('- function append', function () {
+  describe('↳ function append', function () {
     var sb = null;
     beforeEach(function () {
       sb = new StringBuffer();
@@ -28,7 +28,7 @@ describe('The StringBuffer', function () {
     });
   });
 
-  describe('- function toString', function () {
+  describe('↳ function toString', function () {
     var sb = null;
     beforeEach(function () {
       sb = new StringBuffer();
@@ -43,7 +43,7 @@ describe('The StringBuffer', function () {
     });
   });
 
-  describe('- function join', function () {
+  describe('↳ function join', function () {
     var sb = null;
     var delimiter = ',';
     beforeEach(function () {
