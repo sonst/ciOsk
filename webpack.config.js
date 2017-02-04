@@ -12,7 +12,6 @@ var copyPluginFiles = [];
 
 if(REFRESH){
   copyPluginFiles = [
-    { from: './index.html'},
     { from: './theme/ciOsk/css' , to:'./theme/ciOsk/css'},
     { from: './locales' , to:'./locales'}
   ]
