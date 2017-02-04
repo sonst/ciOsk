@@ -1,7 +1,8 @@
 var StringBuffer = require('../util/StringBuffer');
+var Utils        = require('../util/Utils');
 
 var LayoutPanelMarkup = function(options){
-  this.options = options || {
+  this.options =  Utils.mergeObjects( options , {
     uiContent:              true,
     idLayout:               'pageLayout',
     idBtnFullscreen:        'layoutBtnFs',
@@ -10,7 +11,7 @@ var LayoutPanelMarkup = function(options){
     classLayoutUIContainer: 'layout-ui-container',
     classLayoutButton:      'layout-btn',
     classLayoutLogo:        'layout-logo'
-  }
+  });
 }
 
 LayoutPanelMarkup.prototype.getLayoutContainer = function(){
