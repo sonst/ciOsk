@@ -83,12 +83,9 @@ var Panel = function(id, splitType, parent){
 
   var createChildPanelInstance = function(panelId, idAddition){
     var panel = null;
-    var panelElement = null;
-
     panel = new Panel(panelId + idAddition, PanelSplitType.NONE, instance);
     panel.setContainer($('#'+panelId+'_pnl'+idAddition));
     panel.init();
-
     return panel;
   };
 
