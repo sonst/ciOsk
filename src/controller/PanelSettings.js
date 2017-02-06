@@ -1,6 +1,6 @@
 var PanelSettingsAction = require('../view/PanelSettingsAction');
 var PanelSettingsMarkup = require('../view/PanelSettingsMarkup');
-var ActionListener      = require('./ActionListener');
+var ActionListener      = require('../util/ActionListener');
 var $                   = require('jquery');
 
 /**

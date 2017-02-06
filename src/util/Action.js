@@ -23,9 +23,7 @@ var Action = function() {
    *  @param fn {function} - the observerFunction
    */
   this.unsubscribe = function(fn) {
-    if (fn in observerMap) {
-      delete observerMap[fn];
-    }
+    observerMap.delete(fn);
   };
 
   this.unsubscribeAll = function(){
@@ -62,6 +60,22 @@ var Action = function() {
    */
   this.hasSubscriptions = function(){
     return (observerMap.size > 0);
+  };
+
+  this.getObserverMap = function(){
+    return observerMap;
+  };
+
+  this.getCallables = function(handlerFn){
+    var retVal = [];
+    observerMap.forEach(function(item, fn){
+      if(handlerFn == fn){
+        item.some(function(fnName){
+          retVal.push(fnName);
+        });
+      }
+    });
+    return retVal;
   };
 
 }

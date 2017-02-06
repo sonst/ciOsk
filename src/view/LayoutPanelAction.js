@@ -1,9 +1,6 @@
-var Action = require('./Action');
 var $ = require('jquery');
 
-var LayoutPanelAction = function(elementId, options){
-
-  LayoutPanelAction.super_.apply(this);
+var LayoutPanelAction = function(options){
 
   var fullscreen = false,
       instance = this;
@@ -29,17 +26,15 @@ var LayoutPanelAction = function(elementId, options){
   };
 
   this.removeEvents = function(){
+    var uiContainer = getElement().find('.'+options.classLayoutUIContainer);
     detachHideCursorEvent();
     getElement().find('#'+options.idBtnFullscreen).off('click.layout.fullscreen');
-    var uiContainer = $('.'+options.classLayoutUIContainer);
     uiContainer.off('mouseover.panelLayout');
     uiContainer.off('mouseleave.panelLayout');
-
     document.removeEventListener('webkitfullscreenchange',onChangeFullscreenState);
     document.removeEventListener('mozfullscreenchange',onChangeFullscreenState);
     document.removeEventListener('fullscreenchange',onChangeFullscreenState);
     document.removeEventListener('MSFullscreenChange',onChangeFullscreenState);
-
   };
 
   var attachFullscreenEvents = function(){
@@ -196,7 +191,5 @@ var LayoutPanelAction = function(elementId, options){
   };
 
 }
-
-LayoutPanelAction.super_ = Action;
 
 module.exports = LayoutPanelAction;

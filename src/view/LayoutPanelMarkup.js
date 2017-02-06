@@ -24,7 +24,6 @@ LayoutPanelMarkup.prototype.getLayoutContainer = function(){
   return retVal.toString();
 };
 
-
 LayoutPanelMarkup.prototype.getLayoutUIContainer = function(){
   var retVal = new StringBuffer();
   retVal.append('<div class="'+this.options.classLayoutUIContainer+'">');

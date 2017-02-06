@@ -1,6 +1,16 @@
 window.jQuery = require('jquery');
 window.$ = window.jQuery;
 
+/*!
+ * ciOsk 0.0.1
+ *
+ * https://github/
+ *
+ * Released under the MIT license
+ * @author soean / https://github.com/sonst/
+ * Date: 2017-01-20
+ */
+
 /**
  *   @author soean / https://github.com/sonst/
  */
@@ -12,10 +22,7 @@ var Panel        = require('./controller/Panel');
 
 
 var $            = require('jquery');
-                   require('jquery-ui');
-
-
-
+require('jquery-ui');
 
 var ciOsk = function(doc){
 
@@ -28,7 +35,6 @@ var ciOsk = function(doc){
     this.initUI();
     spawnLayoutPanel();
     createRootPanel();
-    console.log('inited on');
   };
 
   var spawnLayoutPanel = function(){
@@ -55,11 +61,11 @@ var ciOsk = function(doc){
   this.initUI = function(){
     BrowserUtils.domZoomPrevention();
     BrowserUtils.suppressBrowsersContextMenuBehaviour();
-   // BrowserUtils.initI18n(onUIReady);
+    // BrowserUtils.initI18n(onUIReady);
   };
 
   $(document).ready(function(){
-     instance.init();
+    instance.init();
   });
 
 }
