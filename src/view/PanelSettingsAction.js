@@ -1,4 +1,4 @@
-var Action = require('./Action');
+var Action = require('../util/Action');
 var $      = require('jquery');
 
 /**
@@ -50,7 +50,7 @@ var PanelSettingsAction = function(options){
 
     buttonOk.off('click.ok.panelSettings').on('click.ok.panelSettings', function(){
       var url = getElement().find('.'+options.classInputUrl).val();
-      instance.invoke('addPanelContent',[url]);
+      instance.invoke('addPanelContent',url);
       instance.invoke('removePanelSettings');
     });
     buttonCancel.off('click.cancel.panelSettings').on('click.cancel.panelSettings', function(){

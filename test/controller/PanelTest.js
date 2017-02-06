@@ -4,17 +4,14 @@ var describe       = require('mocha').describe,
     expect         = require('chai').expect,
     beforeEach     = require('mocha').beforeEach,
     $              = require('jquery'),
-    Action         = require('../../src/view/Action');
-    ActionListener = require('../../src/controller/ActionListener');
+    Action         = require('../../src/util/Action'),
+    ActionListener = require('../../src/util/ActionListener'),
+    PanelSplitType = require('../../src/util/PanelSplitType'),
     LayoutPanel    = require('../../src/controller/LayoutPanel'),
     Panel          = require('../../src/controller/Panel'),
-    PanelSplitType = require('../../src/util/PanelSplitType'),
     PanelMarkup    = require('../../src/view/PanelMarkup'),
     PanelContent   = require('../../src/controller/PanelContent'),
     PanelAction    = require('../../src/view/PanelAction');
-
-
-
 
 
 describe('The Panel', function () {
@@ -269,5 +266,35 @@ describe('The Panel', function () {
       });
       expect(buttonClasses.length).to.equal(0);
     });
+  });
+
+  describe('↳ PanelContent', function(){
+
+    var util = null,
+        panel;
+
+    beforeEach(function () {
+      util = new PanelTestUtilImpl();
+      panel = util.getPanel();
+    });
+
+    afterEach(function(){
+      util.getPanel().remove();
+      util.getLayoutPanel().destroy();
+    });
+
+    it('can be added',function(){
+      var url   = 'http://www.derbauer.de',
+          frame = null;
+      panel.addPanelContent(url);
+      frame = panel.getElement().find('iframe');
+      expect(PanelContent.prototype.isPrototypeOf(panel.panelContent)).to.equal(true);
+      expect(panel.hasPanelContent()).to.equal(true);
+      expect(frame.length).to.equal(1);
+      expect(frame.attr('src')).to.equal(url);
+    });
+
+
+
   });
 });

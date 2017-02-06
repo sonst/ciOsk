@@ -18,7 +18,6 @@ var LayoutPanel = function(parentSelector, options){
       });
 
   this.actions = null;
-
   this.markup  = null;
 
   this.init = function(){

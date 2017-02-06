@@ -6,9 +6,8 @@ var describe            = require('mocha').describe,
     expect              = require('chai').expect,
     beforeEach          = require('mocha').beforeEach,
     $                   = require('jquery'),
-
-    ActionListener      = require('../../src/controller/ActionListener');
-    Action              = require('../../src/view/Action');
+    Action              = require('../../src/util/Action'),
+    ActionListener      = require('../../src/util/ActionListener'),
     PanelSettingsAction = require('../../src/view/PanelSettingsAction'),
     PanelSettingsMarkup = require('../../src/view/PanelSettingsMarkup'),
     PanelSettings       = require('../../src/controller/PanelSettings');
@@ -59,22 +58,43 @@ describe('The PanelSettings', function () {
     });
 
     it('hides the Dialog, clicking cancel', function(){
-
-
       var cancelBtn = panelSettings.element.find('.btn-cancel');
-
       cancelBtn.trigger('click.cancel.panelSettings');
-
       expect(panelSettings.element).to.equal(null);
       expect(panelSettings.actions.hasSubscriptions()).to.equal(false);
-
       expect($('.panel-settings').length).to.equal(0);
       expect($('.panel-blocked').length).to.equal(0);
       expect($('.settings-opened').length).to.equal(0);
-
     });
 
+    it('hides the Dialog, clicking ok', function(){
+      var okBtn = panelSettings.element.find('.btn-ok');
+      okBtn.trigger('click.ok.panelSettings');
+      expect(panelSettings.element).to.equal(null);
+      expect(panelSettings.actions.hasSubscriptions()).to.equal(false);
+      expect($('.panel-settings').length).to.equal(0);
+      expect($('.panel-blocked').length).to.equal(0);
+      expect($('.settings-opened').length).to.equal(0);
+    });
 
+    it('invokes addPanelContent and removePanelSettings, clicking ok', function(){
+      var calledFunction = [],
+          functionArgs   = [],
+          url            = 'http://www.derbauer.de',
+          okBtn          = panelSettings.element.find('.btn-ok');
+      panelSettings.actions.invoke = function(name, args){
+        calledFunction.push(name);
+        functionArgs.push(args);
+      };
+
+      $('#inpSttng_0').val(url);
+      okBtn.trigger('click.ok.panelSettings');
+
+      expect(calledFunction.length).to.equal(2);
+      expect(calledFunction).to.contain('removePanelSettings');
+      expect(calledFunction).to.contain('addPanelContent');
+      expect(functionArgs).to.contain(url);
+    });
   });
 
 

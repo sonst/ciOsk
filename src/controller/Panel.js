@@ -3,7 +3,7 @@ var PanelMarkup     = require('../view/PanelMarkup');
 var PanelAction     = require('../view/PanelAction');
 var PanelContent    = require('../controller/PanelContent');
 var PanelSettings   = require('../controller/PanelSettings');
-var ActionListener  = require('./ActionListener');
+var ActionListener  = require('../util/ActionListener');
 var $               = require('jquery');
 
 /**
@@ -76,7 +76,6 @@ var Panel = function(id, splitType, parent){
   };
 
   this.showSettings = function(){
-    console.log('######showSettings');
     var settings  = new PanelSettings();
     instance.subscribeAction(instance, settings.actions);
   };
@@ -180,7 +179,7 @@ var Panel = function(id, splitType, parent){
   };
 
   this.addPanelContent = function(url){
-    instance.panelContent = new PanelContent(instance.getElement(),url);
+   instance.panelContent = new PanelContent(instance.getElement(),url);
   };
 
   this.setPanelContent = function(pc){

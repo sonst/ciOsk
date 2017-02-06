@@ -1,6 +1,6 @@
-var PanelSplitType = require('../util/PanelSplitType');
 var PanelMarkup    = require('./PanelMarkup');
-var Action         = require('./Action');
+var PanelSplitType = require('../util/PanelSplitType');
+var Action         = require('../util/Action');
 var flex           = require('../util/jquery.resizeFlex');
 var $              = require('jquery');
 
