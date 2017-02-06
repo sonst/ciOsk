@@ -10,10 +10,10 @@ body {
   /*background-color:black;*/
   background: repeating-linear-gradient(
     45deg,
-    #606dbc,
-    #606dbc 10px,
-    #465298 10px,
-    #465298 20px
+    #333333,
+    #333333 10px,
+    #222222 10px,
+    #222222 20px
   );
 }
 
@@ -36,12 +36,31 @@ input:focus {
 .page-layout-container:full-screen {
   width: 100%;
   background-color: rgba(255,255,255,0);
+  background: repeating-linear-gradient(
+    45deg,
+    #333333,
+    #333333 10px,
+    #222222 10px,
+    #222222 20px
+  );
 }
 .page-layout-container:-webkit-full-screen {
-  background-color: rgba(255,255,255,0);
+  background: repeating-linear-gradient(
+    45deg,
+    #333333,
+    #333333 10px,
+    #222222 10px,
+    #222222 20px
+  );
 }
 .page-layout-container:-moz-full-screen {
-  background-color: rgba(255,255,255,0);
+  background: repeating-linear-gradient(
+    45deg,
+    #333333,
+    #333333 10px,
+    #222222 10px,
+    #222222 20px
+  );
 }
 
 .page-layout-container {
