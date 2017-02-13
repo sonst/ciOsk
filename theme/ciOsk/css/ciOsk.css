@@ -253,7 +253,6 @@ input:focus {
   font-size:3em;
 }
 
-
 .panel-content.visible {
   -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
   -webkit-animation-fill-mode:forwards; /*Chrome 16+, Safari 4+*/
@@ -399,8 +398,7 @@ input:focus {
 .layout-btn {
   position:absolute;
   background-color:none;
-  top:1em;
-  right:2em;
+
   height:2em;
   width:2em;
   border: 1px solid grey;
@@ -419,6 +417,15 @@ input:focus {
   color:grey;
   font-size:1em;
   margin:0.5em;
+}
+
+.layout-btn.btn-fullscreen {
+  top:1em;
+  right:1em;
+}
+.layout-btn.btn-save {
+  top:4em;
+  right:1em;
 }
 
 .layout-ui-container {
