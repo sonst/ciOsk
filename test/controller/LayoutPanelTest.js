@@ -20,6 +20,7 @@ describe('The Layout Panel', function () {
       uiContent:              true,
       idLayout:               'pageLayout',
       idBtnFullscreen:        'layoutBtnFs',
+      idBtnSaveConfig:        'layoutBtnSave',
       classActive:            'ui-active',
       classLayout:            'page-layout-container',
       classLayoutUIContainer: 'layout-ui-container',

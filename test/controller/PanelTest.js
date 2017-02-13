@@ -9,6 +9,7 @@ var describe       = require('mocha').describe,
     PanelSplitType = require('../../src/util/PanelSplitType'),
     LayoutPanel    = require('../../src/controller/LayoutPanel'),
     Panel          = require('../../src/controller/Panel'),
+    PanelDriver      = require('../testUtils/PanelDriver');
     PanelMarkup    = require('../../src/view/PanelMarkup'),
     PanelContent   = require('../../src/controller/PanelContent'),
     PanelAction    = require('../../src/view/PanelAction');
@@ -16,79 +17,13 @@ var describe       = require('mocha').describe,
 
 describe('The Panel', function () {
 
-
-
-  function PanelTestUtilImpl(){
-    var panel = null,
-        panelId = 'a',
-        layoutPnl,
-        panelMarkupOptions,
-        options,
-        instance = this;
-
-    this.init = function(){
-      options = {
-        classPanelLeft:          'panel-left',
-        classPanelRight:         'panel-right',
-        classPanelTop:           'panel-top',
-        classPanelBottom:        'panel-bottom',
-        classSplitterVertical:   'splitter-vertical',
-        classSplitterHorizontal: 'splitter-horizontal',
-        eventHideCursor:         'hideCursorEvent.panelLayout',
-        eventShowCursor:         'showCursorEvent.panelLayout'
-      };
-      layoutPnl = buildLayoutPanel();
-      panel = buildPanel();
-    };
-
-    var buildPanel = function(){
-      var retVal =  new Panel(panelId, PanelSplitType.NONE);
-      retVal.setContainer($('#'+layoutPnl.getOptions().idLayout));
-      retVal.init();
-      return retVal;
-    };
-
-    var buildLayoutPanel = function(){
-      var layoutPanelOptions = {
-        uiContent:              true,
-        idLayout:               'pageLayout1',
-        idBtnFullscreen:        'layoutBtnFs',
-        classActive:            'ui-active',
-        classLayout:            'page-layout-container',
-        classLayoutUIContainer: 'layout-ui-container',
-        classLayoutButton:      'layout-btn',
-        classLayoutLogo:        'layout-logo'
-      };
-
-      return new LayoutPanel('body',layoutPanelOptions);
-    };
-
-    this.getLayoutPanel = function(){
-      return layoutPnl;
-    };
-
-    this.getOptions = function(){
-      return options;
-    };
-
-    this.getPanel = function(){
-      return panel;
-    };
-
-    this.getPanelId = function(){
-      return panelId;
-    };
-
-    instance.init();
-  }
-
   describe('↳ object', function(){
 
     var util = null,
         panel;
 
-    beforeEach(function () {
-      util = new PanelTestUtilImpl();
+    beforeEach(function() {
+      util = new PanelDriver();
       panel = util.getPanel();
     });
 
@@ -164,7 +99,7 @@ describe('The Panel', function () {
         panel;
 
     beforeEach(function () {
-      util = new PanelTestUtilImpl();
+      util = new PanelDriver();
       panel = util.getPanel();
     });
 
@@ -185,6 +120,18 @@ describe('The Panel', function () {
       expect($('#'+childOneId).length).to.equal(0);
     });
 
+    it('creates the DOM representation on vertical split',function(){
+      panel.splitPanel(PanelSplitType.VERTICAL);
+      expect($('#'+panel.getChildren()[0].getId()).length).to.equal(1);
+      expect($('#'+panel.getChildren()[1].getId()).length).to.equal(1);
+    });
+
+    it('creates the DOM representation on horizontal split',function(){
+      panel.splitPanel(PanelSplitType.HORIZONTAL);
+      expect($('#'+panel.getChildren()[0].getId()).length).to.equal(1);
+      expect($('#'+panel.getChildren()[1].getId()).length).to.equal(1);
+    });
+
   });
 
 
@@ -194,7 +141,7 @@ describe('The Panel', function () {
         panel;
 
     beforeEach(function () {
-      util = new PanelTestUtilImpl();
+      util = new PanelDriver();
       panel = util.getPanel();
     });
 
@@ -274,7 +221,7 @@ describe('The Panel', function () {
         panel;
 
     beforeEach(function () {
-      util = new PanelTestUtilImpl();
+      util = new PanelDriver();
       panel = util.getPanel();
     });
 
