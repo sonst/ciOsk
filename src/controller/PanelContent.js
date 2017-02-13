@@ -7,7 +7,6 @@ var PanelContent = function(parentElement, url){
       panelContentMarkup = null,
       panelContentAction = null,
       instance           = this,
-      urls               = [],
       refreshInterval    = null;
 
   this.init = function(){
@@ -18,27 +17,6 @@ var PanelContent = function(parentElement, url){
     initDom();
     initActions();
   };
-
-/*  this.addWebFrame = function(urls){
-console.log(urls);
-    urls.push(urls);
-    if(urls.length ==1){
-      initSingleWebFrame(urls[0]);
-    } else {
-
-
-      //
-      //
-
-    }
-
-
-  };
-
-  var appendWebFrame = function(url){
-
-  };
-*/
 
   var initSingleWebFrame = function(url){
     if(container.find('.panel-content').length>0){
@@ -58,6 +36,10 @@ console.log(urls);
 
   this.getUrl = function(){
     return url;
+  };
+
+  this.getRefreshInterval = function(){
+    return refreshInterval;
   };
 
   instance.init();

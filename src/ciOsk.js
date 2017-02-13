@@ -14,14 +14,14 @@ window.$ = window.jQuery;
 /**
  *   @author soean / https://github.com/sonst/
  */
-//var Utils        = require('./util/Utils');
-var BrowserUtils = require('./util/BrowserUtils');
-var LayoutPanel  = require('./controller/LayoutPanel');
-var PanelSplitType = require('./util/PanelSplitType');
-var Panel        = require('./controller/Panel');
+var ApplicationState = require('./controller/ApplicationState');
+var BrowserUtils     = require('./util/BrowserUtils');
+var LayoutPanel      = require('./controller/LayoutPanel');
+var PanelSplitType   = require('./util/PanelSplitType');
+var PanelTreeUtils   = require('./util/PanelTreeUtils');
+var Panel            = require('./controller/Panel');
+var $                = require('jquery');
 
-
-var $            = require('jquery');
 require('jquery-ui');
 
 var ciOsk = function(doc){
@@ -49,13 +49,25 @@ var ciOsk = function(doc){
       classLayoutLogo:        'layout-logo'
     };
     layoutPnl = new LayoutPanel('body', options);
-
   };
 
   var createRootPanel = function(){
-    rootPanel = new Panel('a', PanelSplitType.NONE);
-    rootPanel.setContainer($('#pageLayout'));
-    rootPanel.init();
+
+    //var testSerialized = '{"id":"a","panelType":"PanelSplitType.vertical","children":[{"id":"a0","panelType":"PanelSplitType.horizontal","children":[{"id":"a00","panelType":"PanelSplitType.none","children":[]},{"id":"a01","panelType":"PanelSplitType.none","children":[]}]},{"id":"a1","panelType":"PanelSplitType.vertical","children":[{"id":"a10","panelType":"PanelSplitType.none","children":[]},{"id":"a11","panelType":"PanelSplitType.none","children":[]}]}]}';
+    //BrowserUtils.setLocalStorage('splitPanelState',testSerialized);
+
+    var serializedPanel = BrowserUtils.getLocalStorage('splitPanelState');
+
+    if(serializedPanel != null ){
+      var pUtils = new PanelTreeUtils();
+      rootPanel = pUtils.deserializeToDOM($('#pageLayout'), serializedPanel);
+    }else{
+      rootPanel = new Panel('a', PanelSplitType.NONE);
+      rootPanel.setContainer($('#pageLayout'));
+      rootPanel.init();
+    }
+
+    ApplicationState.rootPanel = rootPanel;
   };
 
   this.initUI = function(){

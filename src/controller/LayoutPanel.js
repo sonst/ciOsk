@@ -10,6 +10,7 @@ var LayoutPanel = function(parentSelector, options){
         uiContent:              true,
         idLayout:               'pageLayout',
         idBtnFullscreen:        'layoutBtnFs',
+        idBtnSaveConfig:        'layoutBtnSave',
         classActive:            'ui-active',
         classLayout:            'page-layout-container',
         classLayoutUIContainer: 'layout-ui-container',
@@ -46,6 +47,10 @@ var LayoutPanel = function(parentSelector, options){
 
   this.getOptions = function(){
     return options;
+  };
+
+  this.getId = function(){
+    return options.idLayout;
   };
 
   instance.init();

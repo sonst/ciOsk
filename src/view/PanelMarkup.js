@@ -45,13 +45,14 @@ var PanelMarkup = function(options){
  *  @return {String} the panel`s markup
  */
 PanelMarkup.prototype.getPanelContainer = function(id, splitType, rootPanel){
-  var panelContainerClass = splitType == PanelSplitType.VERTICAL ? this.options.classPanelContainerHoriz : this.options.classPanelContainerVert,
+  var panelContainerClass = PanelSplitType.VERTICAL.equals(splitType) ? this.options.classPanelContainerHoriz : this.options.classPanelContainerVert,
       retVal = new StringBuffer();
 
   panelContainerClass += rootPanel ? ' root-panel' : '';
 
   retVal.append('<div id="'+id+'" class="panel-container '+panelContainerClass+'">');
-  if(PanelSplitType.NONE != splitType){
+
+  if(!PanelSplitType.NONE.equals(splitType)){
     retVal.append(this.getSplitPanel(id, splitType));
   } else {
     retVal.append('<div id="'+id+this.options.idAdditionFirstPanel+'" class="panel-content '+this.options.classPanel+'">');
@@ -72,8 +73,8 @@ PanelMarkup.prototype.getPanelContainer = function(id, splitType, rootPanel){
  *  @return {String} - The split panel`s markup
  */
 PanelMarkup.prototype.getSplitPanel = function(id, splitType){
-  var firstPanelClass = splitType == PanelSplitType.VERTICAL ? this.options.classPanelLeft : this.options.classPanelTop,
-      secondPanelClass = splitType == PanelSplitType.VERTICAL ? this.options.classPanelRight : this.options.classPanelBottom,
+  var firstPanelClass =  PanelSplitType.VERTICAL.equals(splitType) ? this.options.classPanelLeft : this.options.classPanelTop,
+      secondPanelClass = PanelSplitType.VERTICAL.equals(splitType) ? this.options.classPanelRight : this.options.classPanelBottom,
       retVal = new StringBuffer();
   retVal.append('<div id="'+id+this.options.idAdditionFirstPanel+'" class="'+this.options.classPanel+' '+firstPanelClass+'"></div>');
   retVal.append(this.getSplitter(id, splitType));
@@ -90,7 +91,7 @@ PanelMarkup.prototype.getSplitPanel = function(id, splitType){
  */
 PanelMarkup.prototype.getSplitter = function(id, splitType){
   var retVal = new StringBuffer(),
-      splitterClass = splitType == PanelSplitType.VERTICAL ?
+      splitterClass = PanelSplitType.VERTICAL.equals(splitType) ?
       this.options.classSplitterVertical :
       this.options.classSplitterHorizontal;
   retVal.append('<div id="'+id+'Splitter" class="'+this.options.classSplitter+' '+splitterClass+'" >');

@@ -1,26 +1,32 @@
-var $ = require('jquery');
+var ApplicationState = require('../controller/ApplicationState');
+var PanelTreeUtils   = require('../util/PanelTreeUtils');
+var BrowserUtils     = require('../util/BrowserUtils');
+var Utils            = require('../util/Utils');
+var $                = require('jquery');
 
 var LayoutPanelAction = function(options){
 
   var fullscreen = false,
       instance = this;
 
-  options = options || {
+  options = Utils.mergeObjects(options, {
     uiContent:              true,
     idLayout:               'pageLayout',
     idBtnFullscreen:        'layoutBtnFs',
+    idBtnSaveConfig:        'layoutBtnSave',
     classActive:            'ui-active',
     classLayout:            'page-layout-container',
     classLayoutUIContainer: 'layout-ui-container',
     classLayoutButton:      'layout-btn',
     classLayoutLogo:        'layout-logo'
-  };
+  });
 
 
   this.initEvents = function(){
     // though there are document events attached
     instance.removeEvents();
     attachFullscreenEvents();
+    attachSaveEvents();
     attachHideCursorEvents();
     attachUiEvents();
   };
@@ -35,6 +41,23 @@ var LayoutPanelAction = function(options){
     document.removeEventListener('mozfullscreenchange',onChangeFullscreenState);
     document.removeEventListener('fullscreenchange',onChangeFullscreenState);
     document.removeEventListener('MSFullscreenChange',onChangeFullscreenState);
+  };
+
+  var attachSaveEvents = function(){
+    getElement().find('#'+options.idBtnSaveConfig).off('click.layout.save').on('click.layout.save',function(){
+      instance.onClickSave(this);
+    });
+  };
+
+  this.onClickSave = function(btn){
+    var $this = $(btn);
+    var ptUtil = new PanelTreeUtils();
+console.log('#### CLICK SAVE!  ####');
+    var serialized = ptUtil.serialize(ApplicationState.rootPanel)
+    console.log(serialized);
+    BrowserUtils.setLocalStorage(ApplicationState.const.KEY_LOCAL_STORAGE, serialized);
+
+    $this = null;
   };
 
   var attachFullscreenEvents = function(){

@@ -54,7 +54,7 @@ var Panel = function(id, splitType, parent){
     instance.panelAction = new PanelAction(instance.getId());
     instance.subscribeAction(instance, instance.panelAction);
 
-    if (splitType != PanelSplitType.NONE){
+    if (!PanelSplitType.NONE.equals(splitType)){
       // RESIZABLE should not be a panel action!!
       instance.panelAction.initResizablePanel();
     } else {
@@ -82,7 +82,7 @@ var Panel = function(id, splitType, parent){
 
   var createChildPanelInstance = function(panelId, idAddition){
     var panel = null;
-    panel = new Panel(panelId + idAddition, PanelSplitType.NONE, instance);
+    panel = new Panel((panelId + idAddition), PanelSplitType.NONE, instance);
     panel.setContainer($('#'+panelId+'_pnl'+idAddition));
     panel.init();
     return panel;

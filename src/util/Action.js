@@ -47,7 +47,7 @@ var Action = function() {
   this.fire = function(obj) {
     observerMap.forEach(function(item, fn){
       item.some(function(fnName){
-        if(fnName == obj.name){
+        if(fnName === obj.name){
           fn.call(instance, obj);
           return true;
         }
@@ -69,7 +69,7 @@ var Action = function() {
   this.getCallables = function(handlerFn){
     var retVal = [];
     observerMap.forEach(function(item, fn){
-      if(handlerFn == fn){
+      if(handlerFn === fn){
         item.some(function(fnName){
           retVal.push(fnName);
         });

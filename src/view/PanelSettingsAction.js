@@ -1,4 +1,5 @@
 var Action = require('../util/Action');
+var Utils  = require('../util/Utils');
 var $      = require('jquery');
 
 /**
@@ -11,7 +12,7 @@ var PanelSettingsAction = function(options){
 
   var instance = this;
 
-  var options = options || {
+  var options =  Utils.mergeObjects(options, {
     id:             'panelSettings',
     classContainer: 'panel-settings',
     classDialog:    'panel-settings-diag',
@@ -21,7 +22,7 @@ var PanelSettingsAction = function(options){
     classBtnOk:     'btn-ok',
     classBtnCancel: 'btn-cancel',
     classInputUrl:  'input-url'
-  };
+  });
 
   this.initEvents = function(){
     initState();

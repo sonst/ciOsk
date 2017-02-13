@@ -1,6 +1,7 @@
 var PanelMarkup    = require('./PanelMarkup');
 var PanelSplitType = require('../util/PanelSplitType');
 var Action         = require('../util/Action');
+var Utils          = require('../util/Utils');
 var flex           = require('../util/jquery.resizeFlex');
 var $              = require('jquery');
 
@@ -16,7 +17,7 @@ var PanelAction = function(elementId, options){
       panelMarkup    = new PanelMarkup(),
       mouseOverPanel = false;
 
-  var options = options || {
+  var options = Utils.mergeObjects(options, {
     classBtn:                'panel-ctxt-btn ',
     classBtnExpand:          'btn-panel-expand ',
     classBtnResize:          'btn-panel-resize',
@@ -27,7 +28,7 @@ var PanelAction = function(elementId, options){
     eventClick:              'click.panelActions',
     classPanelLeft:          'panel-left',
     classPanelTop:           'panel-top',
-  };
+  });
 
   this.removeEvents = function(){
     detachContextMenuEvents();

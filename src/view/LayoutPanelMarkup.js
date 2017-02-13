@@ -6,6 +6,7 @@ var LayoutPanelMarkup = function(options){
     uiContent:              true,
     idLayout:               'pageLayout',
     idBtnFullscreen:        'layoutBtnFs',
+    idBtnSaveConfig:        'layoutBtnSave',
     classActive:            'ui-active',
     classLayout:            'page-layout-container',
     classLayoutUIContainer: 'layout-ui-container',
@@ -36,6 +37,7 @@ LayoutPanelMarkup.prototype.getLayoutButtonMarkup = function(){
   var retVal = new StringBuffer();
   retVal.append(this.getLayoutLogoMarkup());
   retVal.append(this.getFullScreenBtnMarkup());
+  retVal.append(this.getSaveConfigBtnMarkup());
   return retVal.toString();
 };
 
@@ -47,8 +49,16 @@ LayoutPanelMarkup.prototype.getLayoutLogoMarkup = function(){
 
 LayoutPanelMarkup.prototype.getFullScreenBtnMarkup = function(){
   var retVal = new StringBuffer();
-  retVal.append('<div style="display:none;" id="'+this.options.idBtnFullscreen+'" class=" '+this.options.classLayoutButton+'" >');
+  retVal.append('<div style="display:none;" id="'+this.options.idBtnFullscreen+'" class="btn-fullscreen '+this.options.classLayoutButton+'" >');
   retVal.append('<i style="top:0.5em;left:0.6em;" class="fa fa-expand"></i>');
+  retVal.append('</div>');
+  return retVal.toString();
+};
+
+LayoutPanelMarkup.prototype.getSaveConfigBtnMarkup = function(){
+  var retVal = new StringBuffer();
+  retVal.append('<div style="display:none;" id="'+this.options.idBtnSaveConfig+'" class="btn-save '+this.options.classLayoutButton+'" >');
+  retVal.append('<i style="top:0.5em;left:0.6em;" class="fa fa-save"></i>');
   retVal.append('</div>');
   return retVal.toString();
 };
