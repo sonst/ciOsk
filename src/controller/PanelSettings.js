@@ -7,7 +7,7 @@ var $                   = require('jquery');
  *  @constructor
  *  @augments ActionListener
  */
-var PanelSettings = function(){
+var PanelSettings = function(url){
 
   PanelSettings.super_.apply(this);
 
@@ -31,6 +31,7 @@ var PanelSettings = function(){
     instance.markup = new PanelSettingsMarkup();
     container.prepend(instance.markup.getContainer());
     instance.element = container.find('.panel-settings');
+    $('.input-url').val(url);
     instance.element.fadeIn();
   };
 

@@ -32,7 +32,9 @@ var PanelContent = function(parentElement, url){
     initSingleWebFrame(url);
   }
 
-  var initActions = function(){};
+  var initActions = function(){
+
+  };
 
   this.getUrl = function(){
     return url;

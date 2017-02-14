@@ -36,7 +36,7 @@ var PanelSettingsAction = function(options){
   };
 
   var initState = function(){
-    $('.'+options.classInputUrl).first().val('http://');
+    $('.'+options.classInputUrl).first().attr('placeholder', 'http://');
     $('.'+options.classInputUrl).first().focus();
   };
 

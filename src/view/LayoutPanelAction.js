@@ -52,11 +52,8 @@ var LayoutPanelAction = function(options){
   this.onClickSave = function(btn){
     var $this = $(btn);
     var ptUtil = new PanelTreeUtils();
-console.log('#### CLICK SAVE!  ####');
     var serialized = ptUtil.serialize(ApplicationState.rootPanel)
-    console.log(serialized);
     BrowserUtils.setLocalStorage(ApplicationState.const.KEY_LOCAL_STORAGE, serialized);
-
     $this = null;
   };
 

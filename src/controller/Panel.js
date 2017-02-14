@@ -72,11 +72,13 @@ var Panel = function(id, splitType, parent){
     var panel = instance.getElement()
     if(!panel.hasChildren()){
       panel.append(markup);
+      hasContent = true;
     }
   };
 
   this.showSettings = function(){
-    var settings  = new PanelSettings();
+    var url = instance.panelContent ? instance.panelContent.getUrl() : '';
+    var settings  = new PanelSettings(url);
     instance.subscribeAction(instance, settings.actions);
   };
 
@@ -175,7 +177,7 @@ var Panel = function(id, splitType, parent){
   };
 
   this.hasPanelContent = function(){
-    return instance.panelContent != null;
+    return instance.panelContent !== null;
   };
 
   this.addPanelContent = function(url){
@@ -184,6 +186,10 @@ var Panel = function(id, splitType, parent){
 
   this.setPanelContent = function(pc){
     instance.panelContent = pc;
+  };
+
+  this.getPanelContent = function(){
+    return instance.panelContent;
   };
 
   this.isRootPanel = function(){

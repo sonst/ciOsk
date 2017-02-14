@@ -15,29 +15,24 @@ var PanelTreeUtils = function(){
     var rootPanel = new Panel(rootPanelModel.id, PanelSplitType.NONE);
     rootPanel.setContainer(container);
     rootPanel.init();
-
-    if(rootPanelModel.children.length > 0){
-      rootPanel.splitPanel(PanelSplitType.byName(rootPanelModel.panelType));
-
-      var orientation = PanelSplitType.VERTICAL.equals(rootPanel.getPanelType()) ? 'width' : 'height';
-      rootPanel.getChildren()[0].getElement().parent().css(orientation, rootPanelModel.extent);
-
-      panelModelToPanel(rootPanelModel.children[0], rootPanel.getChildren()[0]);
-      panelModelToPanel(rootPanelModel.children[1], rootPanel.getChildren()[1]);
-    }
+    panelModelToPanel(rootPanelModel, rootPanel);
     return rootPanel;
   };
 
-  var panelModelToPanel = function(parentModel, parentPanel){
-    if(parentModel.children.length > 0){
-      parentPanel.splitPanel(PanelSplitType.byName(parentModel.panelType));
-
-      var orientation = PanelSplitType.VERTICAL.equals(parentPanel.getPanelType()) ? 'width' : 'height';
-      parentPanel.getChildren()[0].getElement().parent().css(orientation, parentModel.extent);
-
-      panelModelToPanel(parentModel.children[0], parentPanel.getChildren()[0]);
-      panelModelToPanel(parentModel.children[1], parentPanel.getChildren()[1]);
+  var panelModelToPanel = function(panelModel, panel){
+    if(panelModel.children.length > 0){
+      panel.splitPanel(PanelSplitType.byName(panelModel.panelType));
+      resetSize(panel, panelModel.extent);
+      panelModelToPanel(panelModel.children[0], panel.getChildren()[0]);
+      panelModelToPanel(panelModel.children[1], panel.getChildren()[1]);
+    } else if(panelModel.contentModel !== null){
+        panel.addPanelContent(panelModel.contentModel.url);
     }
+  };
+
+  var resetSize = function(panel, extent){
+      var orientation = PanelSplitType.VERTICAL.equals(panel.getPanelType()) ? 'width' : 'height';
+      panel.getChildren()[0].getElement().parent().css(orientation, extent);
   };
 
   var panelToPanelModel = function(panel){
@@ -47,11 +42,16 @@ var PanelTreeUtils = function(){
     retVal.id  = panel.getId();
     retVal.panelType = panel.getPanelType();
 
+
     if(panel.hasChildren()){
       orientation = PanelSplitType.VERTICAL.equals(panel.getPanelType()) ? 'width' : 'height';
       retVal.extent = panel.getChildren()[0].getElement().parent().css(orientation);
       retVal.children.push(panelToPanelModel(panel.getChildren()[0]));
       retVal.children.push(panelToPanelModel(panel.getChildren()[1]));
+    } else if(panel.hasPanelContent()){
+      retVal.contentModel = new ContentModel();
+      retVal.contentModel.url = panel.getPanelContent().getUrl();
+      retVal.contentModel.refreshInterval = panel.getPanelContent().getRefreshInterval();
     }
     return retVal;
   };
@@ -60,10 +60,8 @@ var PanelTreeUtils = function(){
     var retVal = new ContentModel();
     retVal.url = panelContent.getUrl();
     retVal.refreshInterval = panelContent.getRefreshInterval();
-
     return retVal;
   };
-
 
 };
 
