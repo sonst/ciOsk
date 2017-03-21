@@ -21,6 +21,7 @@ var PanelSettingsAction = function(options){
     classContent:   'settings-content',
     classBtnOk:     'btn-ok',
     classBtnCancel: 'btn-cancel',
+    classBtnAdd:    'btn-add',
     classInputUrl:  'input-url'
   });
 
@@ -40,14 +41,13 @@ var PanelSettingsAction = function(options){
     $('.'+options.classInputUrl).first().focus();
   };
 
-  var initKeyEvents = function(){
-  };
-
   var initBtnEvents = function(){
     var buttonOk = null,
-        buttonCancel = null;
+        buttonCancel = null,
+        btnAdd = null;
     buttonOk = getElement().find('.'+options.classBtnOk);
     buttonCancel = getElement().find('.'+options.classBtnCancel);
+    btnAdd = getElement().find('.'+options.classBtnAdd);
 
     buttonOk.off('click.ok.panelSettings').on('click.ok.panelSettings', function(){
       var url = getElement().find('.'+options.classInputUrl).val();
@@ -56,6 +56,9 @@ var PanelSettingsAction = function(options){
     });
     buttonCancel.off('click.cancel.panelSettings').on('click.cancel.panelSettings', function(){
       instance.invoke('removePanelSettings');
+    });
+    btnAdd.off('click.add.panelSettings').on('click.add.panelSettings', function(){
+      instance.invoke('addPanelContentUrl');
     });
   };
 

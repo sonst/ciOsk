@@ -11,6 +11,7 @@ function PanelSettingsMarkup(options){
     classContent:   'settings-content',
     classBtnOk:     'btn-ok',
     classBtnCancel: 'btn-cancel',
+    classBtnAdd:    'btn-add',
     classInputUrl:  'input-url'
   });
 }
@@ -45,7 +46,7 @@ PanelSettingsMarkup.prototype.getUrlInput = function(inputId){
   retVal.append('<input id="'+inputId+'" data-i18n="[placeholder]panelSettings.inputs.url.placeholder" class="'+this.options.classInputUrl+'" type="text" value=""></input>');
   retVal.append('</td>');
   retVal.append('<td>');
-  retVal.append('<i style="font-size:1em;margin-left:1em;" class="fa fa-plus"></i>');
+  retVal.append('<i style="font-size:1em;margin-left:1em;" class="fa fa-plus '+this.options.classBtnAdd+'"></i>');
   retVal.append('</td>');
   retVal.append('</tr>');
   return retVal.toString();
