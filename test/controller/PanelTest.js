@@ -154,7 +154,7 @@ describe('The Panel', function () {
       var panelElement = panel.getElement();
       panelElement.trigger('mouseenter.panel');
       var contextMenu = panelElement.find('.panel-context-menu');
-      expect(contextMenu.is(':visible')).to.equal(true);
+      expect(contextMenu.length).to.equal(1);
     });
 
     it('will get closed on mouseleave', function(){
