@@ -15,7 +15,6 @@ var PanelContent = function(parentElement, url){
     panelContentMarkup = new PanelContentMarkup();
     panelContentAction = new PanelContentAction();
     initDom();
-    initActions();
   };
 
   var initSingleWebFrame = function(url){
@@ -31,10 +30,6 @@ var PanelContent = function(parentElement, url){
   var initDom = function(){
     initSingleWebFrame(url);
   }
-
-  var initActions = function(){
-
-  };
 
   this.getUrl = function(){
     return url;

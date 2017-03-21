@@ -1,8 +1,8 @@
 var PanelSplitType = require('./PanelSplitType');
-var Panel          = require('../../src/controller/Panel');
-var PanelModel     = require('../../src/model/PanelModel');
-var ContentModel   = require('../../src/model/ContentModel');
-var $              = require('jquery');
+    Panel          = require('../../src/controller/Panel'),
+    PanelModel     = require('../../src/model/PanelModel'),
+    ContentModel   = require('../../src/model/ContentModel');
+
 
 var PanelTreeUtils = function(){
 

@@ -12,4 +12,3 @@ require('./util/SplashInfoTest');
 require('./controller/LayoutPanelTest');
 require('./controller/PanelTest');
 require('./controller/PanelSettingsTest');
-
