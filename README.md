@@ -9,7 +9,7 @@ The compilation of content can be displayed fullscreen.
 >> concourse pipeline visualizations are i.e. not introducing any kind of origin policy...  
 
 	
-##build:
+## build:
 
 ### run the devBuild
 ><code>npm run build</code>
@@ -28,11 +28,11 @@ The compilation of content can be displayed fullscreen.
 ><code>npm test</code>
 <p>Run solely the tests</p>
 
-###live-reload
->####install browserSync
+### live-reload
+>#### install browserSync
 <code>npm install -g browser-sync </code>
 
->####nav to ./dist and start browserSync
+>#### nav to ./dist and start browserSync
 <code>browser-sync start --server --files "*.css, *.html, *.js"  </code>
 
-##run:
+## run:

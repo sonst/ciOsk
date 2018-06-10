@@ -27,7 +27,7 @@ StringBuffer.prototype.append = function(s){
  */
 StringBuffer.prototype.toString = function() {
   return this.buffer.join('');
-}
+};
 
 
 /**
