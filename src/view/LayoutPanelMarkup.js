@@ -13,7 +13,7 @@ var LayoutPanelMarkup = function(options){
     classLayoutButton:      'layout-btn',
     classLayoutLogo:        'layout-logo'
   });
-}
+};
 
 LayoutPanelMarkup.prototype.getLayoutContainer = function(){
   var retVal = new StringBuffer();

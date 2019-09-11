@@ -14,8 +14,8 @@ var PanelSettings = function(url){
   var instance  = this,
       container = null;
 
-  this.element = null,
-  this.markup  = null,
+  this.element = null;
+  this.markup  = null;
   this.actions = null;
 
   var init = function(){
@@ -47,12 +47,10 @@ var PanelSettings = function(url){
       return;
     instance.element.find('*').off();
     instance.element.fadeOut(function(){
-      console.log('+++++');
       $(this).remove();
       $('.panel-blocked').removeClass('panel-blocked');
       $('.settings-opened').removeClass('settings-opened');
       if(typeof callback === 'function'){
-        console.log('!!!');
         callback();
       }
       instance.element = null;
@@ -64,7 +62,7 @@ var PanelSettings = function(url){
 
   init();
 
-}
+};
 
 PanelSettings.super_= ActionListener;
 

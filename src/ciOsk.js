@@ -22,8 +22,6 @@ var PanelTreeUtils   = require('./util/PanelTreeUtils');
 var Panel            = require('./controller/Panel');
 var $                = require('jquery');
 
-require('jquery-ui');
-
 var ciOsk = function(doc){
 
   var instance  = this,

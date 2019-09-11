@@ -1,6 +1,4 @@
-  // init jsdom and environment
-require('../testUtils/jsDomBaseline');
-
+require('../testUtils/JsDomUtil');
 var describe          = require('mocha').describe,
     it                = require('mocha').it,
     expect            = require('chai').expect,

@@ -1,6 +1,6 @@
 'use strict';
 
-const PanelSplitType = require('../util/PanelSplitType'),
+var PanelSplitType = require('../util/PanelSplitType'),
     StringBuffer = require('../util/StringBuffer'),
     Utils = require('../util/Utils');
 
@@ -35,7 +35,6 @@ var PanelMarkup = function (options) {
         classBtnAddContent: 'btn-panel-add'
     });
 };
-
 
 /**
  *  Returns the panel`s container markup
@@ -98,7 +97,7 @@ PanelMarkup.prototype.getSplitter = function (id, splitType) {
     retVal.append('<div class="' + this.options.classSplitterVisualHandle + '"></div>');
 
     retVal.append('</div>');
-    return retVal.toString()
+    return retVal.toString();
 };
 
 PanelMarkup.prototype.getSplitPanelBlocker = function () {

@@ -1,6 +1,6 @@
 'use strict';
 
-const PanelSplitType = require('../util/PanelSplitType'),
+var PanelSplitType = require('../util/PanelSplitType'),
     PanelMarkup = require('../view/PanelMarkup'),
     PanelAction = require('../view/PanelAction'),
     PanelContent = require('../controller/PanelContent'),
@@ -111,10 +111,8 @@ var Panel = function (id, splitType, parent) {
         }
     };
 
-    var _replaceDOM = function (panel, highlight) {
-        if (highlight) {
-            panel.getElement().effect('highlight', {color: "#303030"}, 600);
-        }
+    var _replaceDOM = function (panel) {
+
         var newElement = panel.getElement();
         instance.getElement().replaceWith(newElement);
         if (instance.getParent() === null) {
@@ -148,7 +146,7 @@ var Panel = function (id, splitType, parent) {
             throw new Error('removed item has no sibling!');
         }
 
-        _replaceDOM(notSelectedChild, true);
+        _replaceDOM(notSelectedChild);
         _removeChild(pnl);
 
         notSelectedChild.setParent(instance.getParent());

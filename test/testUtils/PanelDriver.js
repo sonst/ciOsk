@@ -1,14 +1,12 @@
-var Panel          = require('../../src/controller/Panel');
-var LayoutPanel    = require('../../src/controller/LayoutPanel');
-var PanelSplitType = require('../../src/util/PanelSplitType');
-var PanelLayoutDriver = require('./PanelLayoutDriver');
-var $              = require('jquery');
+var Panel             = require('../../src/controller/Panel'),
+    PanelSplitType    = require('../../src/util/PanelSplitType'),
+    PanelLayoutDriver = require('./PanelLayoutDriver'),
+    $                 = require('jquery');
 
 var PanelDriver = function(){
   var panel = null,
       panelId = 'a',
       layoutPnl,
-      panelMarkupOptions,
       options,
       instance = this;
 
@@ -45,6 +43,6 @@ var PanelDriver = function(){
   };
 
   instance.init();
-}
+};
 
 module.exports = PanelDriver;

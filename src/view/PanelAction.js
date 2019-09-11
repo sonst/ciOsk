@@ -27,7 +27,7 @@ var PanelAction = function(elementId, options){
     classBtnRemove:          'btn-panel-remove',
     eventClick:              'click.panelActions',
     classPanelLeft:          'panel-left',
-    classPanelTop:           'panel-top',
+    classPanelTop:           'panel-top'
   });
 
   this.removeEvents = function(){
@@ -109,7 +109,7 @@ var PanelAction = function(elementId, options){
     //
     $('body').off('mouseup.panelSplitter').on('mouseup.panelSplitter', function(){
       var $this = $(this);
-      if($this.find('.panel-settings').length == 0 ){
+      if($this.find('.panel-settings').length === 0 ){
         $this.find('.panel-blocked').removeClass('panel-blocked');
       }
       $this.find('.splitter').removeClass('ui-mouse-down');
@@ -124,7 +124,7 @@ var PanelAction = function(elementId, options){
   this.openCtxtMenu = function(immediate){
     var isRootPanel = getPanelElement().closest('.panel-container').hasClass('root-panel');
     mouseOverPanel = true;
-    if(getPanelElement().find('.panel-context-menu').length == 0){
+    if(getPanelElement().find('.panel-context-menu').length === 0){
       getPanelElement().prepend(panelMarkup.getCtxtMenuMarkup(isRootPanel));
       attachContextBtnEvents();
       if(immediate){
