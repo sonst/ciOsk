@@ -11,7 +11,7 @@ var CompressionPlugin = require("compression-webpack-plugin");
 var path = require('path'),
     CopyWebpackPlugin = require('copy-webpack-plugin'),
     HtmlWebpackPlugin = require('html-webpack-plugin'),
-    UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+    TerserPlugin = require("terser-webpack-plugin");
 
 
 var PROD = JSON.parse(process.env.PROD_ENV || '0'),
@@ -42,7 +42,7 @@ module.exports = {
     optimization:  PROD === 1  ? {
         nodeEnv: 'production',
         minimize: true,
-        minimizer: [new UglifyJsPlugin()] ,
+        minimizer: [new TerserPlugin({ sourceMap: true })] ,
         concatenateModules: false,
         runtimeChunk: 'single',
         splitChunks: {
