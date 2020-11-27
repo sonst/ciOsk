@@ -16,12 +16,26 @@ var path = require('path'),
 
 var PROD = JSON.parse(process.env.PROD_ENV || '0'),
     plugins = [],
-    copyPluginFiles = [
-        { from: './index.html'},
-        { from: './theme' , to:'./theme'},
-        { from: './locales' , to:'./locales'},
-        { from: './lib' , to:'./lib'}
-    ];
+    copyPluginFiles = {
+        patterns: [
+            {
+                from: './index.html',
+                to: './index.html'
+            },
+            {
+                from: './theme',
+                to: './theme'
+            },
+            {
+                from: './locales',
+                to: './locales'
+            },
+            {
+                from: './lib',
+                to: './lib'
+            }
+        ]
+    };
 
 if (PROD) {
     console.log('\x1b[36m', '\n ☂', '\x1b[0m', 'PRODUCTION Built:');
