@@ -56,7 +56,7 @@ module.exports = {
     optimization:  PROD === 1  ? {
         nodeEnv: 'production',
         minimize: true,
-        minimizer: [new TerserPlugin({ sourceMap: true })] ,
+        minimizer: [new TerserPlugin()] ,
         concatenateModules: false,
         runtimeChunk: 'single',
         splitChunks: {
@@ -79,20 +79,19 @@ module.exports = {
             }]
     },
     output: {
-        path: path.join(__dirname, '/dist'),
+        path: path.resolve(__dirname, './dist'),
         filename: PROD === 1 ? 'ciOsk.min.[contenthash].js' : 'ciOsk.[contenthash].js'
-    },
-    node: {
-        console: true,
-        fs: 'empty',
-        net: 'empty',
-        tls: 'empty'
     },
     resolve: {
         alias: {
             'main': path.resolve(__dirname, './src/main.js')
         },
-        extensions: ['.js', '.json']
+        extensions: ['.js', '.json'],
+        fallback: {
+            fs: false,
+            net: false,
+            tls: false
+        }
     },
     plugins: plugins
 };

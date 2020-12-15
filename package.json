@@ -9,8 +9,8 @@
   },
   "scripts": {
     "test": "make test",
-    "build": "webpack --display-error-details",
-    "build-release": "PROD_ENV=1 webpack --verbose",
+    "build": "webpack",
+    "build-release": "PROD_ENV=1 webpack",
     "refresh": "REFRESH_ENV=1 webpack",
     "prebuild": "make test",
     "prebuild-release": "make test"
@@ -19,18 +19,18 @@
   "license": "MIT",
   "devDependencies": {
     "chai": "^4.2.0",
-    "compression-webpack-plugin": "^4.0.1",
-    "copy-webpack-plugin": "^6.0.3",
-    "html-webpack-plugin": "^4.3.0",
+    "compression-webpack-plugin": "^7.0.0",
+    "copy-webpack-plugin": "^7.0.0",
+    "html-webpack-plugin": "^4.5.0",
     "jsdom": "^16.4.0",
-    "mocha": "^8.1.1",
+    "mocha": "^8.2.1",
     "mocha-jsdom": "^2.0.0",
-    "terser-webpack-plugin": "^4.1.0",
-    "webpack": "^4.44.1",
-    "webpack-cli": "^3.3.12"
+    "terser-webpack-plugin": "^5.0.3",
+    "webpack": "^5.10.2",
+    "webpack-cli": "^4.2.0"
   },
   "dependencies": {
-    "i18next": "^19.6.3",
+    "i18next": "^19.8.4",
     "jquery": "^3.5.1",
     "jquery-ui-dist": "^1.12.1"
   }

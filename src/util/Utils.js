@@ -1,5 +1,3 @@
-var util = require('util');
-
 var Utils = function(){}
 
 Utils.prototype.isArray = function(obj){
@@ -12,10 +10,6 @@ Utils.prototype.mergeObjects = function(from, to){
     to[attr] = from[attr];
   }
   return to;
-};
-
-Utils.prototype.printObjectTree = function(object){
-  console.log(util.inspect(object,{depth: null}));
 };
 
 Utils.prototype.isEmpty = function(obj) {
