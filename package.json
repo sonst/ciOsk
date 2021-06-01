@@ -18,20 +18,20 @@
   "author": "soean steiger <soean.steiger@googlemail.com>",
   "license": "MIT",
   "devDependencies": {
-    "chai": "^4.2.0",
-    "compression-webpack-plugin": "^7.0.0",
-    "copy-webpack-plugin": "^7.0.0",
-    "html-webpack-plugin": "^4.5.0",
-    "jsdom": "^16.4.0",
-    "mocha": "^8.2.1",
+    "chai": "^4.3.4",
+    "compression-webpack-plugin": "^8.0.0",
+    "copy-webpack-plugin": "^9.0.0",
+    "html-webpack-plugin": "^5.3.1",
+    "jsdom": "^16.6.0",
+    "mocha": "^8.4.0",
     "mocha-jsdom": "^2.0.0",
-    "terser-webpack-plugin": "^5.0.3",
-    "webpack": "^5.10.2",
-    "webpack-cli": "^4.2.0"
+    "terser-webpack-plugin": "^5.1.3",
+    "webpack": "^5.38.1",
+    "webpack-cli": "^4.7.0"
   },
   "dependencies": {
-    "i18next": "^19.8.4",
-    "jquery": "^3.5.1",
+    "i18next": "^20.3.1",
+    "jquery": "^3.6.0",
     "jquery-ui-dist": "^1.12.1"
   }
 }
