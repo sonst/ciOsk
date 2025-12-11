@@ -23,7 +23,7 @@
     "copy-webpack-plugin": "^11.0.0",
     "html-webpack-plugin": "^5.5.3",
     "jsdom": "^22.1.0",
-    "mocha": "^10.2.0",
+    "mocha": "^10.8.2",
     "mocha-jsdom": "^2.0.0",
     "terser-webpack-plugin": "^5.3.9",
     "webpack": "^5.88.2",
